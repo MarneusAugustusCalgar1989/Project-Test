@@ -5,7 +5,6 @@ import TestArray from './components/TestArray';
 
 function App() {
   const [route, setRoute] = useState(['test', 'results']);
-  console.log(route);
 
   return (
     <div className='App'>
