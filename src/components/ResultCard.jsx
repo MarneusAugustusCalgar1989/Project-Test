@@ -6,7 +6,7 @@ import ResultDescription from './ResultDescription'
 const ResultCard = () => {
   return (
     <>
-      <button>Удалить a;kjsdf результат</button>
+      <button>Удалить результат</button>
 
       <div className="testHolder">
         <div className="testcard-header">
