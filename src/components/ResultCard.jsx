@@ -1,15 +1,15 @@
-import React from 'react';
-import ResultImage from './ResultImage';
-import ResultHeader from './ResultHeader';
-import ResultDescription from './ResultDescription';
+import React from 'react'
+import ResultImage from './ResultImage'
+import ResultHeader from './ResultHeader'
+import ResultDescription from './ResultDescription'
 
 const ResultCard = () => {
   return (
     <>
-      <button>Удалить тестовую карточку</button>
+      <button>Удалить результат</button>
 
-      <div className='testHolder'>
-        <div className='testcard-header'>
+      <div className="testHolder">
+        <div className="testcard-header">
           <h1>Название результата</h1>
         </div>
         <ResultImage />
@@ -17,9 +17,9 @@ const ResultCard = () => {
         <ResultDescription />
       </div>
 
-      <button>Добавить карточку результатов</button>
+      <button>Добавить результат</button>
     </>
-  );
-};
+  )
+}
 
-export default ResultCard;
+export default ResultCard
