@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addQuestionImageUrl } from './store/store';
 
-const PictureInput = ({ typeOfUsing, imgSrc }) => {
+const PictureInput = ({ typeOfUsing, imgSrc, parentId }) => {
   const dispatch = useDispatch();
 
   const addImgUrl = e => {
@@ -14,7 +14,7 @@ const PictureInput = ({ typeOfUsing, imgSrc }) => {
         .textContent
     );
 
-    dispatch(addQuestionImageUrl(inputUrl, inputId - 1));
+    dispatch(addQuestionImageUrl(inputUrl, parentId));
 
     e.target.parentNode.pictureUrl.value = '';
   };

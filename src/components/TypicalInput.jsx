@@ -9,7 +9,7 @@ import {
 
 const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
   const dispatch = useDispatch();
-  const currentState = useSelector(state => state);
+  const currentState = useSelector(state => state[1]);
 
   // Добавляем вопрос
   const addTextQuestion = e => {

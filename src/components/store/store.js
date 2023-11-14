@@ -15,13 +15,16 @@ export const REMOVE_ANSWER = 'REMOVE_ANSWER';
 //Базовые значения
 
 const initValue = [
-  {
-    id: 0,
-    questionImage:
-      'https://ic.pics.livejournal.com/shichengaru/82230564/1654969/1654969_original.jpg',
-    question: 'Текст вопроса',
-    answers: [{ answerId: 0, answer: 'Текст ответа', answerRelation: 0 }],
-  },
+  [{ resId: 0, restHeader: '', resDescr: '' }],
+  [
+    {
+      id: 0,
+      questionImage:
+        'https://ic.pics.livejournal.com/shichengaru/82230564/1654969/1654969_original.jpg',
+      question: 'Текст вопроса',
+      answers: [{ answerId: 0, answer: 'Текст ответа', answerRelation: 0 }],
+    },
+  ],
 ];
 
 //ACTION CREATORS - делатели экшенов
@@ -73,10 +76,13 @@ export const removeAnswer = (answerBlockId, answerId) => ({
 const testStore = (state = [], action) => {
   switch (action.type) {
     case ADD_PICTURE_URL:
-      if (state.length === 0) {
-        return [{ ...state, questionImageUrl: action.questionImageUrl, id: 0 }];
+      if (state[1].length === 0) {
+        return [
+          ...state[0],
+          [{ ...state[1], questionImageUrl: action.questionImageUrl, id: 0 }],
+        ];
       } else {
-        state[action.id].questionImage = action.questionImageUrl;
+        state[1][action.id].questionImage = action.questionImageUrl;
         return [...state];
       }
     case REMOVE_PICTURE_URL:
@@ -88,12 +94,14 @@ const testStore = (state = [], action) => {
     case REMOVE_TEST_CARD:
       //Надо сделать так, чтобы при удалении не следующих друг за другом вопросов очередь id оставалась равной с отображением на сайте, то есть, надо пересчитывать айдишники, если удаленный не является последним.
 
-      if (state.length > 1) {
-        if (action.testCardId === state[state.length - 1].id) {
-          return (state = state.filter(el => el.id !== action.testCardId));
+      if (state[1].length > 1) {
+        if (action.testCardId === state[1][state.length - 1].id) {
+          state[1] = state[1].filter(el => el.id !== action.testCardId);
+
+          return [...state];
         } else {
-          state = state.filter(el => el.id !== action.testCardId);
-          state.map(el => {
+          state[1] = state[1].filter(el => el.id !== action.testCardId);
+          state[1].map(el => {
             el.id === 0 ? (el.id = 0) : (el.id -= 1);
             return [...state];
           });
@@ -101,35 +109,40 @@ const testStore = (state = [], action) => {
 
         return [...state];
       } else {
-        state[0].id = 0;
+        state[1][0].id = 0;
 
         return [...state];
       }
 
     case ADD_TEST_CARD:
       if (state.length === 0) {
-        state = initValue;
+        state[1] = initValue;
         return [...state];
       } else {
-        return [...state].concat({
-          id: state[state.length - 1].id + 1,
-          questionImage:
-            'https://ic.pics.livejournal.com/shichengaru/82230564/1654969/1654969_original.jpg',
-          question: 'Текст вопроса',
-          answers: [{ answerId: 0, answer: 'Текст ответа', answerRelation: 0 }],
-        });
+        return [
+          [...state[0]],
+          [...state[1]].concat({
+            id: state[1][state[1].length - 1].id + 1,
+            questionImage:
+              'https://ic.pics.livejournal.com/shichengaru/82230564/1654969/1654969_original.jpg',
+            question: 'Текст вопроса',
+            answers: [
+              { answerId: 0, answer: 'Текст ответа', answerRelation: 0 },
+            ],
+          }),
+        ];
       }
     case ADD_QUESTION:
-      state[action.qusetionId].question = action.textOfTheQuestion;
+      state[1][action.qusetionId].question = action.textOfTheQuestion;
       return [...state];
 
     case ADD_ANSWER_LINE:
       let newId =
-        state[action.answerBlockId].answers[
-          state[action.answerBlockId].answers.length - 1
+        state[1][action.answerBlockId].answers[
+          state[1][action.answerBlockId].answers.length - 1
         ].answerId;
 
-      state[action.answerBlockId].answers.push({
+      state[1][action.answerBlockId].answers.push({
         answerId: (newId += 1),
         answer: '',
         answerRelation: 0,
@@ -138,24 +151,24 @@ const testStore = (state = [], action) => {
       return [...state];
 
     case ADD_ANSWER:
-      let findAnswerToAdd = state[action.answerBlockId].answers.find(
+      let findAnswerToAdd = state[1][action.answerBlockId].answers.find(
         el => el.answerId === action.answerId
       );
-      let indexForAnswerTextAdd = state[action.answerBlockId].answers.findIndex(
-        el => el === findAnswerToAdd
-      );
+      let indexForAnswerTextAdd = state[1][
+        action.answerBlockId
+      ].answers.findIndex(el => el === findAnswerToAdd);
 
-      state[action.answerBlockId].answers[indexForAnswerTextAdd].answer =
+      state[1][action.answerBlockId].answers[indexForAnswerTextAdd].answer =
         action.textOftheAnswer;
 
       return [...state];
 
     case REMOVE_ANSWER:
-      let findAnswer = state[action.answerBlockId].answers.find(
+      let findAnswer = state[1][action.answerBlockId].answers.find(
         el => el.answerId === action.answerId
       );
 
-      state[action.answerBlockId].answers = state[
+      state[1][action.answerBlockId].answers = state[1][
         action.answerBlockId
       ].answers.filter(el => {
         return el !== findAnswer;
