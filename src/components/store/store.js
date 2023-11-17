@@ -22,7 +22,14 @@ export const SET_RESULT_RELATION = 'SET_RESULT_RELATION'
 //Базовые значения
 
 const initValue = [
-  [{ resId: 0, restHeader: '', resDescr: '', resImg: '' }],
+  [
+    {
+      resId: 0,
+      restHeader: '',
+      resDescr: '',
+      resImg: 'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
+    },
+  ],
   [
     {
       id: 0,
@@ -89,9 +96,10 @@ export const removeResultCard = (resultCardId) => ({
   resultCardId,
 })
 
-export const addResultImage = (resultImageUrl) => ({
+export const addResultImage = (resultImageUrl, resultCardId) => ({
   type: ADD_RESULT_IMAGE,
   resultImageUrl,
+  resultCardId,
 })
 
 export const addResultHeader = (resultHeader) => ({
@@ -215,20 +223,30 @@ const testStore = (state = [], action) => {
       return [...state]
 
     case ADD_RESULT_CARD:
-      console.log(action.resultCardId)
       state[0] = [...state[0]].concat({
         resId: action.resultCardId,
         restHeader: '',
         resDescr: '',
-        resImg: '',
+        resImg:
+          'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
       })
 
       return [...state]
 
     case ADD_RESULT_IMAGE:
-      state[0][0].resImg = action.resultImageUrl
+      // resultCardId
+      // resultImageUrl
+      state.map((el) => {
+        el.map((el) => {
+          if (el.hasOwnProperty('resId')) {
+            el.resId === action.resultCardId
+              ? (el.newres = action.resultImageUrl)
+              : (el.newres = el.resImg)
+          }
+        })
+      })
 
-      return [...state]
+      return [state[0], state[1]]
 
     case ADD_RESULT_HEADER:
       return [...state]

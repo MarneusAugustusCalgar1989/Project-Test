@@ -2,15 +2,18 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addResultImage } from './store/store'
 
-const ResultImage = () => {
-  const dispatch = useDispatch()
+const ResultImage = ({ cardId }) => {
   const currentValue = useSelector((state) => state[0])
-  let resultImage = 'URL'
+  const imgUrl = currentValue[cardId].resImg
+
+  const dispatch = useDispatch()
 
   const addResultImgUrl = (e) => {
     e.preventDefault()
-    resultImage = e.target.parentNode.resultPictureUrl.value
-    dispatch(addResultImage(resultImage))
+    const inputUrl = e.target.parentNode.resultPictureUrl.value
+
+    dispatch(addResultImage(inputUrl, cardId))
+    e.target.parentNode.resultPictureUrl.value = ''
   }
 
   return (
@@ -18,11 +21,11 @@ const ResultImage = () => {
       <div className="image-holder">
         <img
           className="question-img"
-          src="src"
-          alt={`Вы пытались загрузить картинку по ссылке {src}`}
+          src={imgUrl}
+          alt={`Вы пытались загрузить картинку по ссылке ${imgUrl}`}
         />
       </div>
-      <p>{resultImage}</p>
+      <p>{imgUrl}</p>
       <form>
         <input type="text" name="resultPictureUrl" />
         <button className="addResultImageUrl" onClick={addResultImgUrl}>
