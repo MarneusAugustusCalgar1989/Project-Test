@@ -1,21 +1,28 @@
-import { createStore } from 'redux';
+import { createStore } from 'redux'
 
 //CONSTANTS - константы, которые можно было бы вынести, но я не стал
-export const ADD_QUESTION = 'ADD_QUESTION';
-export const ADD_PICTURE_URL = 'ADD_PICTURE_URL';
-export const REMOVE_PICTURE_URL = 'REMOVE_PICTURE_URL';
+export const ADD_QUESTION = 'ADD_QUESTION'
+export const ADD_PICTURE_URL = 'ADD_PICTURE_URL'
+export const REMOVE_PICTURE_URL = 'REMOVE_PICTURE_URL'
 
-export const ADD_TEST_CARD = 'ADD_TEST_CARD';
-export const REMOVE_TEST_CARD = 'REMOVE_TEST_CARD';
+export const ADD_TEST_CARD = 'ADD_TEST_CARD'
+export const REMOVE_TEST_CARD = 'REMOVE_TEST_CARD'
 
-export const ADD_ANSWER = 'ADD_ANSWER';
-export const ADD_ANSWER_LINE = 'ADD_ANSWER_LINE';
-export const REMOVE_ANSWER = 'REMOVE_ANSWER';
+export const ADD_ANSWER = 'ADD_ANSWER'
+export const ADD_ANSWER_LINE = 'ADD_ANSWER_LINE'
+export const REMOVE_ANSWER = 'REMOVE_ANSWER'
+
+export const ADD_RESULT_CARD = 'ADD_RESULT_CARD'
+export const ADD_RESULT_IMAGE = 'ADD_RESULT_IMAGE'
+export const ADD_RESULT_HEADER = 'ADD_RESULT_HEADER'
+export const ADD_RESULT_DESCRIPTION = 'ADD_RESULT_DESCRIPTION'
+export const REMOVE_RESULT_CARD = 'REMOVE_RESULT_CARD'
+export const SET_RESULT_RELATION = 'SET_RESULT_RELATION'
 
 //Базовые значения
 
 const initValue = [
-  [{ resId: 0, restHeader: '', resDescr: '' }],
+  [{ resId: 0, restHeader: '', resDescr: '', resImg: '' }],
   [
     {
       id: 0,
@@ -25,52 +32,83 @@ const initValue = [
       answers: [{ answerId: 0, answer: 'Текст ответа', answerRelation: 0 }],
     },
   ],
-];
+]
 
 //ACTION CREATORS - делатели экшенов
 export const addQuestion = (textOfTheQuestion, qusetionId) => ({
   type: ADD_QUESTION,
   textOfTheQuestion,
   qusetionId,
-});
+})
 export const addQuestionImageUrl = (questionImageUrl, id) => ({
   type: ADD_PICTURE_URL,
   questionImageUrl,
   id,
-});
+})
 
-export const removeQuestionImageUrl = questionImageUrl => ({
+export const removeQuestionImageUrl = (questionImageUrl) => ({
   type: REMOVE_PICTURE_URL,
   questionImageUrl,
-});
+})
 
 export const addAnswer = (textOftheAnswer, answerId, answerBlockId) => ({
   type: ADD_ANSWER,
   textOftheAnswer,
   answerId,
   answerBlockId,
-});
+})
 
-export const addNewAnswerLine = answerBlockId => ({
+export const addNewAnswerLine = (answerBlockId) => ({
   type: ADD_ANSWER_LINE,
   answerBlockId,
-});
+})
 
-export const addTestCard = testCardId => ({
+export const addTestCard = (testCardId) => ({
   type: ADD_TEST_CARD,
   testCardId,
-});
+})
 
-export const removeTestCard = testCardId => ({
+export const removeTestCard = (testCardId) => ({
   type: REMOVE_TEST_CARD,
   testCardId,
-});
+})
 
 export const removeAnswer = (answerBlockId, answerId) => ({
   type: REMOVE_ANSWER,
   answerBlockId,
   answerId,
-});
+})
+
+export const addResultCard = (resultCardId) => ({
+  type: ADD_RESULT_CARD,
+  resultCardId,
+})
+
+export const removeResultCard = (resultCardId) => ({
+  type: REMOVE_RESULT_CARD,
+  resultCardId,
+})
+
+export const addResultImage = (resultImageUrl) => ({
+  type: ADD_RESULT_IMAGE,
+  resultImageUrl,
+})
+
+export const addResultHeader = (resultHeader) => ({
+  type: ADD_RESULT_HEADER,
+  resultHeader,
+})
+
+export const addResultDescription = (resultDescription) => ({
+  type: ADD_RESULT_DESCRIPTION,
+  resultDescription,
+})
+
+export const setResultRelation = (resultId) => ({
+  type: SET_RESULT_RELATION,
+  resultId,
+})
+
 //REDUCER - он же редуктор
 
 const testStore = (state = [], action) => {
@@ -80,44 +118,44 @@ const testStore = (state = [], action) => {
         return [
           ...state[0],
           [{ ...state[1], questionImageUrl: action.questionImageUrl, id: 0 }],
-        ];
+        ]
       } else {
-        state[1][action.id].questionImage = action.questionImageUrl;
-        return [...state];
+        state[1][action.id].questionImage = action.questionImageUrl
+        return [...state]
       }
     case REMOVE_PICTURE_URL:
       let found = state.find(
-        el => el.questionImageUrl === action.questionImageUrl
-      );
-      return state.filter(el => el.questionImageUrl !== found.questionImageUrl);
+        (el) => el.questionImageUrl === action.questionImageUrl
+      )
+      return state.filter(
+        (el) => el.questionImageUrl !== found.questionImageUrl
+      )
 
     case REMOVE_TEST_CARD:
-      //Надо сделать так, чтобы при удалении не следующих друг за другом вопросов очередь id оставалась равной с отображением на сайте, то есть, надо пересчитывать айдишники, если удаленный не является последним.
-
       if (state[1].length > 1) {
         if (action.testCardId === state[1][state.length - 1].id) {
-          state[1] = state[1].filter(el => el.id !== action.testCardId);
+          state[1] = state[1].filter((el) => el.id !== action.testCardId)
 
-          return [...state];
+          return [...state]
         } else {
-          state[1] = state[1].filter(el => el.id !== action.testCardId);
-          state[1].map(el => {
-            el.id === 0 ? (el.id = 0) : (el.id -= 1);
-            return [...state];
-          });
+          state[1] = state[1].filter((el) => el.id !== action.testCardId)
+          state[1].map((el) => {
+            el.id === 0 ? (el.id = 0) : (el.id -= 1)
+            return [...state]
+          })
         }
 
-        return [...state];
+        return [...state]
       } else {
-        state[1][0].id = 0;
+        state[1][0].id = 0
 
-        return [...state];
+        return [...state]
       }
 
     case ADD_TEST_CARD:
       if (state.length === 0) {
-        state[1] = initValue;
-        return [...state];
+        state[1] = initValue
+        return [...state]
       } else {
         return [
           [...state[0]],
@@ -130,57 +168,82 @@ const testStore = (state = [], action) => {
               { answerId: 0, answer: 'Текст ответа', answerRelation: 0 },
             ],
           }),
-        ];
+        ]
       }
     case ADD_QUESTION:
-      state[1][action.qusetionId].question = action.textOfTheQuestion;
-      return [...state];
+      state[1][action.qusetionId].question = action.textOfTheQuestion
+      return [...state]
 
     case ADD_ANSWER_LINE:
       let newId =
         state[1][action.answerBlockId].answers[
           state[1][action.answerBlockId].answers.length - 1
-        ].answerId;
+        ].answerId
 
       state[1][action.answerBlockId].answers.push({
         answerId: (newId += 1),
         answer: '',
         answerRelation: 0,
-      });
+      })
 
-      return [...state];
+      return [...state]
 
     case ADD_ANSWER:
       let findAnswerToAdd = state[1][action.answerBlockId].answers.find(
-        el => el.answerId === action.answerId
-      );
+        (el) => el.answerId === action.answerId
+      )
       let indexForAnswerTextAdd = state[1][
         action.answerBlockId
-      ].answers.findIndex(el => el === findAnswerToAdd);
+      ].answers.findIndex((el) => el === findAnswerToAdd)
 
       state[1][action.answerBlockId].answers[indexForAnswerTextAdd].answer =
-        action.textOftheAnswer;
+        action.textOftheAnswer
 
-      return [...state];
+      return [...state]
 
     case REMOVE_ANSWER:
       let findAnswer = state[1][action.answerBlockId].answers.find(
-        el => el.answerId === action.answerId
-      );
+        (el) => el.answerId === action.answerId
+      )
 
       state[1][action.answerBlockId].answers = state[1][
         action.answerBlockId
-      ].answers.filter(el => {
-        return el !== findAnswer;
-      });
+      ].answers.filter((el) => {
+        return el !== findAnswer
+      })
 
-      return [...state];
+      return [...state]
+
+    case ADD_RESULT_CARD:
+      console.log(action.resultCardId)
+      state[0] = [...state[0]].concat({
+        resId: action.resultCardId,
+        restHeader: '',
+        resDescr: '',
+        resImg: '',
+      })
+
+      return [...state]
+
+    case ADD_RESULT_IMAGE:
+      state[0][0].resImg = action.resultImageUrl
+
+      return [...state]
+
+    case ADD_RESULT_HEADER:
+      return [...state]
+
+    case ADD_RESULT_DESCRIPTION:
+      return [...state]
+
+    case SET_RESULT_RELATION:
+      return [...state]
 
     default: {
-      return state;
+      return state
     }
   }
-};
+}
 
 //STORE - она же хранилка, пока устарешвая, без тулкита
 
@@ -188,4 +251,4 @@ export const store = createStore(
   testStore,
   initValue,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+)
