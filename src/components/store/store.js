@@ -25,7 +25,7 @@ const initValue = [
   [
     {
       resId: 0,
-      resHeader: '!',
+      resHeader: '',
       resDescr: '',
       resImg: 'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
     },
@@ -41,7 +41,8 @@ const initValue = [
   ],
 ]
 
-//ACTION CREATORS - делатели экшенов
+//ACTION CREATORS
+
 export const addQuestion = (textOfTheQuestion, qusetionId) => ({
   type: ADD_QUESTION,
   textOfTheQuestion,
@@ -119,7 +120,7 @@ export const setResultRelation = (resultId) => ({
   resultId,
 })
 
-//REDUCER - он же редуктор
+//REDUCER
 
 const testStore = (state = [], action) => {
   switch (action.type) {
@@ -236,8 +237,6 @@ const testStore = (state = [], action) => {
       return [...state]
 
     case ADD_RESULT_IMAGE:
-      // resultCardId
-      // resultImageUrl
       state[0] = state[0].map((el) => {
         if (el.resId === action.resultCardId) {
           el.resImg = action.resultImageUrl
@@ -248,8 +247,6 @@ const testStore = (state = [], action) => {
       return [...state]
 
     case ADD_RESULT_HEADER:
-      // resultHeader
-      // resultCardId
       state[0] = state[0].map((el) => {
         if (el.resId === action.resultCardId) {
           el.resHeader = action.resultHeader
@@ -273,7 +270,6 @@ const testStore = (state = [], action) => {
       return [...state]
 
     case REMOVE_RESULT_CARD:
-      // resultCardId
       state[0] = state[0].filter((el) => {
         return el.resId !== action.resultCardId
       })
@@ -294,7 +290,7 @@ const testStore = (state = [], action) => {
   }
 }
 
-//STORE - она же хранилка, пока устарешвая, без тулкита
+//STORE - пока без тулкита
 
 export const store = createStore(
   testStore,
