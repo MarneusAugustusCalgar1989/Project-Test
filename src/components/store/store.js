@@ -272,6 +272,22 @@ const testStore = (state = [], action) => {
     case SET_RESULT_RELATION:
       return [...state]
 
+    case REMOVE_RESULT_CARD:
+      // resultCardId
+      state[0] = state[0].filter((el) => {
+        return el.resId !== action.resultCardId
+      })
+
+      state[0].map((el) => {
+        if (el.resId > action.resultCardId) {
+          el.resId -= 1
+        }
+
+        return el
+      })
+
+      return [...state]
+
     default: {
       return state
     }
