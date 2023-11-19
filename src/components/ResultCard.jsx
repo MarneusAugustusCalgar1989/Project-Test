@@ -2,8 +2,6 @@ import React from 'react'
 import ResultImage from './ResultImage'
 import ResultHeader from './ResultHeader'
 import ResultDescription from './ResultDescription'
-import { useDispatch, useSelector } from 'react-redux'
-import { addResultCard } from './store/store'
 
 const ResultCard = ({ cardId }) => {
   return (
@@ -15,8 +13,8 @@ const ResultCard = ({ cardId }) => {
           <h1>Название результата</h1>
         </div>
         <ResultImage cardId={cardId} />
-        <ResultHeader />
-        <ResultDescription />
+        <ResultHeader cardId={cardId} />
+        <ResultDescription cardId={cardId} />
       </div>
     </>
   )

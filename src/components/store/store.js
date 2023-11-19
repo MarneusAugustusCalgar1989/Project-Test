@@ -25,7 +25,7 @@ const initValue = [
   [
     {
       resId: 0,
-      restHeader: '',
+      resHeader: '!',
       resDescr: '',
       resImg: 'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
     },
@@ -102,14 +102,16 @@ export const addResultImage = (resultImageUrl, resultCardId) => ({
   resultCardId,
 })
 
-export const addResultHeader = (resultHeader) => ({
+export const addResultHeader = (resultHeader, resultCardId) => ({
   type: ADD_RESULT_HEADER,
   resultHeader,
+  resultCardId,
 })
 
-export const addResultDescription = (resultDescription) => ({
+export const addResultDescription = (resultDescription, resultCardId) => ({
   type: ADD_RESULT_DESCRIPTION,
   resultDescription,
+  resultCardId,
 })
 
 export const setResultRelation = (resultId) => ({
@@ -225,7 +227,7 @@ const testStore = (state = [], action) => {
     case ADD_RESULT_CARD:
       state[0] = [...state[0]].concat({
         resId: action.resultCardId,
-        restHeader: '',
+        resHeader: '',
         resDescr: '',
         resImg:
           'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
@@ -236,22 +238,35 @@ const testStore = (state = [], action) => {
     case ADD_RESULT_IMAGE:
       // resultCardId
       // resultImageUrl
-      state.map((el) => {
-        el.map((el) => {
-          if (el.hasOwnProperty('resId')) {
-            el.resId === action.resultCardId
-              ? (el.newres = action.resultImageUrl)
-              : (el.newres = el.resImg)
-          }
-        })
+      state[0] = state[0].map((el) => {
+        if (el.resId === action.resultCardId) {
+          el.resImg = action.resultImageUrl
+        }
+        return el
       })
 
-      return [state[0], state[1]]
+      return [...state]
 
     case ADD_RESULT_HEADER:
+      // resultHeader
+      // resultCardId
+      state[0] = state[0].map((el) => {
+        if (el.resId === action.resultCardId) {
+          el.resHeader = action.resultHeader
+        }
+
+        return el
+      })
       return [...state]
 
     case ADD_RESULT_DESCRIPTION:
+      state[0] = state[0].map((el) => {
+        if (el.resId === action.resultCardId) {
+          el.resDescr = action.resultDescription
+        }
+
+        return el
+      })
       return [...state]
 
     case SET_RESULT_RELATION:
