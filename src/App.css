@@ -6,11 +6,7 @@
 body {
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-}
-
-button {
-  margin: 0.5rem;
-  padding: 0.5rem;
+  background-color: azure;
 }
 
 .button-holder {
@@ -44,6 +40,7 @@ button {
   width: 1rem;
   height: 1rem;
   cursor: pointer;
+  margin: 0.5rem;
 }
 
 .image-holder {
@@ -59,4 +56,37 @@ button {
 }
 .answer-id {
   visibility: hidden;
+}
+
+.testHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headers {
+  margin-top: 1rem;
+  margin-bottom: -2rem;
+  color: cadetblue;
+}
+
+button {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  color: aliceblue;
+  border: none;
+  background-color: cadetblue;
+}
+
+.remove-test-card {
+  margin-left: 95%;
+  margin-bottom: 0.1rem;
+  font-size: 2rem;
+  background-color: transparent;
+  color: cadetblue;
+  transition: all 0.3s ease-in-out;
+}
+
+.remove-test-card:hover {
+  transform: scale(1.2) rotate(90deg);
 }

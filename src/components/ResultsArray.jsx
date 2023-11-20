@@ -19,7 +19,7 @@ const ResultsArray = () => {
 
   return (
     <div>
-      <h1>Здесь будут результаты перечисляться</h1>
+      <h1 className="headers">Здесь будут результаты перечисляться</h1>
       {currentValue.map((el) => {
         return <ResultCard key={el.resId} cardId={el.resId} />
       })}

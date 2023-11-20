@@ -1,0 +1,108 @@
+/* Вопросы */
+
+.questionInputStyle {
+  width: 120%;
+  background-color: cadetblue;
+  border-radius: 10px;
+  height: 100px;
+  color: white;
+  font-size: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.questionInputStyle p {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.questionInputStyle form {
+  background-color: cadetblue;
+}
+
+.questionInputStyle input {
+  margin-left: 1rem;
+  outline: none;
+  outline-offset: 0;
+  background-color: cadetblue;
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.questionInputStyle input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-size: 1rem;
+}
+
+/* Ответы */
+
+.answerInputStyle {
+  width: 100%;
+  max-width: 600px;
+  background-color: rgb(161, 224, 226);
+  border-radius: 10px;
+  min-height: 100px;
+  color: white;
+  font-size: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.answerInputStyle p {
+  font-size: 1rem;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.answerInputStyle form {
+  background-color: rgb(161, 224, 226);
+}
+
+.answerInputStyle input {
+  outline: none;
+  outline-offset: 0;
+  background-color: rgb(161, 224, 226);
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.answerInputStyle input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-size: 1rem;
+}
+
+.answerInputStyle .addNewAnswerButton {
+  margin-top: 1rem;
+}
+
+.questionInputStyle button,
+.addAnswerTextStyle {
+  display: none;
+}
+
+.addNewAnswerButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 2rem;
+  margin-bottom: -2.5rem;
+}

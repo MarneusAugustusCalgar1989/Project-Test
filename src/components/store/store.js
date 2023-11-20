@@ -200,27 +200,40 @@ const testStore = (state = [], action) => {
       return [...state]
 
     case ADD_ANSWER:
-      let findAnswerToAdd = state[1][action.answerBlockId].answers.find(
-        (el) => el.answerId === action.answerId
-      )
-      let indexForAnswerTextAdd = state[1][
-        action.answerBlockId
-      ].answers.findIndex((el) => el === findAnswerToAdd)
+      // textOftheAnswer,
+      // answerId,
+      // answerBlockId,
 
-      state[1][action.answerBlockId].answers[indexForAnswerTextAdd].answer =
-        action.textOftheAnswer
+      state[1] = state[1].map((el) => {
+        if (el.id === action.answerBlockId) {
+          el.answers.map((elem) => {
+            if (elem.answerId === action.answerId) {
+              elem.answer = action.textOftheAnswer
+            }
+          })
+        }
 
+        return el
+      })
       return [...state]
 
     case REMOVE_ANSWER:
-      let findAnswer = state[1][action.answerBlockId].answers.find(
-        (el) => el.answerId === action.answerId
-      )
+      // answerBlockId
+      // answerId
+
+      let toRemove = state[1][action.answerBlockId].answers[action.answerId]
 
       state[1][action.answerBlockId].answers = state[1][
         action.answerBlockId
       ].answers.filter((el) => {
-        return el !== findAnswer
+        return el !== toRemove
+      })
+
+      state[1][action.answerBlockId].answers.map((el) => {
+        if (el.answerId > action.answerId) {
+          el.answerId -= 1
+        }
+        return el
       })
 
       return [...state]
