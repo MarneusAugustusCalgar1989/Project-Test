@@ -1,28 +1,32 @@
-.pictureHolderMain {
+.resultImg {
+  /* margin-top: 3rem; */
+
+  max-width: 500px;
+}
+
+.imageHolder {
   width: 500px;
-  background-color: rgb(161, 224, 226);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1rem;
 }
 
-.pictureHolderMain img {
-  width: 100%;
+.imageHolder img {
+  width: 490px;
 }
 
-.pictureHolderMain p {
+.resultImg p {
   font-size: 1rem;
   word-wrap: break-word;
   cursor: pointer;
 }
 
-.pictureHolderMain form {
+.resultImg form {
   background-color: rgb(161, 224, 226);
+  width: 500px;
+  border-radius: 10px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-.pictureHolderMain input {
+.resultImg input {
   margin: 1rem auto;
   outline: none;
   outline-offset: 0;
@@ -32,14 +36,15 @@
   color: white;
   font-size: 1rem;
   text-align: center;
+  width: 100%;
 }
 
-.pictureHolderMain input::-webkit-input-placeholder {
+.resultImg input::-webkit-input-placeholder {
   color: white;
   opacity: 0.5;
   font-size: 1rem;
 }
 
-.pictureHolderMain button {
+.resultImg button {
   display: none;
 }

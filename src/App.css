@@ -90,3 +90,14 @@ button {
 .remove-test-card:hover {
   transform: scale(1.2) rotate(90deg);
 }
+
+.results-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.result {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

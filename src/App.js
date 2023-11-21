@@ -1,27 +1,27 @@
-import { useState } from 'react'
-import './App.css'
-import ResultsArray from './components/ResultsArray'
-import TestArray from './components/TestArray'
+import { useState } from 'react';
+import './App.css';
+import ResultsArray from './components/ResultsArray';
+import TestArray from './components/TestArray';
 
 function App() {
-  const [route, setRoute] = useState(['test', 'results'])
+  const [route, setRoute] = useState(['test', 'results']);
   window.addEventListener('load', () => {
-    setRoute('test')
-  })
+    setRoute('results');
+  });
 
   return (
-    <div className="App">
-      <div className="button-holder">
+    <div className='App'>
+      <div className='button-holder'>
         <button
           onClick={() => {
-            setRoute('test')
+            setRoute('test');
           }}
         >
           Test
         </button>
         <button
           onClick={() => {
-            setRoute('results')
+            setRoute('results');
           }}
         >
           Results
@@ -31,7 +31,7 @@ function App() {
       {route === 'test' && <TestArray />}
       {route === 'results' && <ResultsArray />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

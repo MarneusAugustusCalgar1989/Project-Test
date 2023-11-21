@@ -1,0 +1,102 @@
+/* Заголовок результата */
+
+.resultHeaderInputStyle {
+  max-width: 500px;
+  width: 100%;
+  background-color: cadetblue;
+  border-radius: 10px;
+  height: 100px;
+  color: white;
+  font-size: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.resultHeaderInputStyle p {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.resultHeaderInputStyle form {
+  background-color: cadetblue;
+  width: 100%;
+}
+
+.resultHeaderInputStyle input {
+  margin-left: 1rem;
+  outline: none;
+  outline-offset: 0;
+  background-color: cadetblue;
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  width: 80%;
+}
+
+.resultHeaderInputStyle input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.resultHeaderInputStyle button {
+  display: none;
+}
+
+/* Описание результата  */
+.resultDescriptionInputStyle {
+  width: 480px;
+
+  background-color: rgb(161, 224, 226);
+  border-radius: 10px;
+  height: 100px;
+  color: white;
+  font-size: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.resultDescriptionInputStyle p {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.resultDescriptionInputStyle form {
+  background-color: rgb(161, 224, 226);
+  width: 100%;
+}
+
+.resultDescriptionInputStyle input {
+  margin-left: 1rem;
+  outline: none;
+  outline-offset: 0;
+  background-color: rgb(161, 224, 226);
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  width: 80%;
+}
+
+.resultDescriptionInputStyle input::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.resultDescriptionInputStyle button {
+  display: none;
+}
