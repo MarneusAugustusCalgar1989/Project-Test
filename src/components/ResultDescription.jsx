@@ -23,6 +23,16 @@ const ResultDescription = ({ cardId }) => {
     e.target.parentNode.resultDescriptionField.value = '';
     setResDescr(true);
   };
+
+  const addResultDescriptionValueControlled = e => {
+    dispatch(
+      addResultDescription(
+        e.target.parentNode.resultDescriptionField.value,
+        cardId
+      )
+    );
+  };
+
   return (
     <div
       className={styles.resultDescriptionInputStyle}
@@ -38,6 +48,8 @@ const ResultDescription = ({ cardId }) => {
             type='text'
             name='resultDescriptionField'
             placeholder='Описание результата'
+            onChange={addResultDescriptionValueControlled}
+            value={resultDescriptionText}
           />
           <button onClick={addResultDescriptionValue}>
             {' '}

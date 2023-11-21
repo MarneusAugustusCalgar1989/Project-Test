@@ -1,57 +1,74 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addAnswer,
   addNewAnswerLine,
   addQuestion,
   removeAnswer,
-} from './store/store'
+} from './store/store';
 
-import styles from './styles/typicalInput.module.css'
+import styles from './styles/typicalInput.module.css';
 
 const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
-  const dispatch = useDispatch()
-  const currentState = useSelector((state) => state[1])
+  const dispatch = useDispatch();
+  const currentState = useSelector(state => state[1]);
 
-  const [qInput, setQinput] = useState(false)
-  const [aInput, setAinput] = useState(false)
+  const [qInput, setQinput] = useState(false);
+  const [aInput, setAinput] = useState(false);
 
   // Добавляем вопрос
-  const addTextQuestion = (e) => {
-    e.preventDefault()
-    const question = e.target.parentNode.question.value
+  const addTextQuestion = e => {
+    e.preventDefault();
+    const question = e.target.parentNode.question.value;
 
-    dispatch(addQuestion(question, parentId))
-    e.target.parentNode.question.value = ''
+    dispatch(addQuestion(question, parentId));
 
-    setQinput(true)
-  }
+    setQinput(true);
+  };
+
+  const addTextQuestionControlled = e => {
+    const question = e.target.parentNode.question.value;
+
+    dispatch(addQuestion(question, parentId));
+  };
+
   // Добавляем ответы
-  const addAnswerText = (e) => {
-    e.preventDefault()
-    const answer = e.target.parentNode.answer.value
+  const addAnswerText = e => {
+    e.preventDefault();
+    const answer = e.target.parentNode.answer.value;
 
     if (answer.length !== 0) {
-      dispatch(addAnswer(answer, tId, parentId))
-      setAinput(true)
-      e.target.parentNode.answer.value = ''
+      dispatch(addAnswer(answer, tId, parentId));
+      setAinput(true);
+      e.target.parentNode.answer.value = tCont;
     }
-  }
+  };
 
-  const addNewAnswer = (e) => {
-    dispatch(addNewAnswerLine(parentId))
-  }
+  const addAnswerTextControlled = e => {
+    const answer = e.target.parentNode.answer.value;
 
-  const removeSelectedAnswer = (e) => {
-    dispatch(removeAnswer(parentId, tId))
-  }
+    dispatch(addAnswer(answer, tId, parentId));
+  };
+
+  const addPreviousValue = e => {
+    setQinput(false);
+    console.log(e.target.parentNode.querySelector('form'));
+  };
+
+  const addNewAnswer = e => {
+    dispatch(addNewAnswerLine(parentId));
+  };
+
+  const removeSelectedAnswer = e => {
+    dispatch(removeAnswer(parentId, tId));
+  };
 
   // Тестовая зона
 
-  const rightClick = (e) => {
-    e.preventDefault()
-    alert('ПРАВАЯ КНОПКА МЫШИ!')
-  }
+  const rightClick = e => {
+    e.preventDefault();
+    alert('ПРАВАЯ КНОПКА МЫШИ!');
+  };
 
   return (
     <>
@@ -60,17 +77,22 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
         <div className={styles.questionInputStyle}>
           {qInput && (
             <p
-              onDoubleClick={() => {
-                setQinput(false)
-              }}
-              title="Двойной клик для редактирования содержания"
+              onDoubleClick={addPreviousValue}
+              title='Двойной клик для редактирования содержания'
             >
               {tCont}
             </p>
           )}
           {!qInput && (
             <form>
-              <input type="text" name="question" placeholder="Введите вопрос" />
+              <input
+                className='testQuest'
+                type='text'
+                name='question'
+                placeholder='Введите текст вопроса'
+                onChange={addTextQuestionControlled}
+                value={tCont}
+              />
               <button onClick={addTextQuestion}> Добавить вопрос </button>
             </form>
           )}
@@ -82,12 +104,12 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           {aInput && (
             <p
               onDoubleClick={() => setAinput(false)}
-              title="Двойной клик для редактирования ответа"
+              title='Двойной клик для редактирования ответа'
             >
               {tCont}
               {currentState[parentId].answers.length > 1 && (
                 <span
-                  className="remove-answer-button"
+                  className='remove-answer-button'
                   onClick={removeSelectedAnswer}
                 >
                   &#215;
@@ -99,9 +121,11 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           {!aInput && (
             <form>
               <input
-                type="text"
-                name="answer"
-                placeholder="Введите текст ответа"
+                type='text'
+                name='answer'
+                placeholder='Введите текст ответа'
+                value={tCont}
+                onChange={addAnswerTextControlled}
               />
               <button
                 onClick={addAnswerText}
@@ -122,7 +146,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default TypicalInput
+export default TypicalInput;

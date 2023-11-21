@@ -6,7 +6,7 @@ import TestArray from './components/TestArray';
 function App() {
   const [route, setRoute] = useState(['test', 'results']);
   window.addEventListener('load', () => {
-    setRoute('results');
+    setRoute('test');
   });
 
   return (

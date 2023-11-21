@@ -20,6 +20,14 @@ const ResultHeader = ({ cardId }) => {
     e.target.parentNode.resultHeaderField.value = '';
     setResultHeader(true);
   };
+
+  const addResultHeaderValueControlled = e => {
+    dispatch(
+      addResultHeader(e.target.parentNode.resultHeaderField.value, cardId)
+    );
+    e.target.parentNode.resultHeaderField.value = '';
+  };
+
   return (
     <div
       className={styles.resultHeaderInputStyle}
@@ -39,6 +47,8 @@ const ResultHeader = ({ cardId }) => {
             type='text'
             name='resultHeaderField'
             placeholder='Введите название результата'
+            onChange={addResultHeaderValueControlled}
+            value={resultHeaderText}
           />
           <button onClick={addResultHeaderValue}> Название результата </button>
         </form>
