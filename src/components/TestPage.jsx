@@ -77,13 +77,15 @@ const TestPage = ({ el }) => {
         />
         {el.answers.map((ans) => {
           return (
-            <TypicalInput
-              stringType="answer"
-              tCont={ans.answer}
-              tId={ans.answerId}
-              parentId={el.id}
-              key={ans.answerId + 'answerInput'}
-            />
+            <>
+              <TypicalInput
+                stringType="answer"
+                tCont={ans.answer}
+                tId={ans.answerId}
+                parentId={el.id}
+                key={ans.answerId + 'answerInput'}
+              />
+            </>
           )
         })}
         <button onClick={addNewAnswer} className="addNewAnswerButton">

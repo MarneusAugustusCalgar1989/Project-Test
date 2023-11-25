@@ -4,10 +4,12 @@ import {
   addAnswer,
   addNewAnswerLine,
   addQuestion,
+  dataForRelation,
   removeAnswer,
 } from './store/store'
 
 import styles from './styles/typicalInput.module.css'
+import ModalWindow from './ModalWindow'
 
 const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
   const dispatch = useDispatch()
@@ -26,10 +28,8 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
       setQinput(true)
     }
   }
-
   const addTextQuestionControlled = (e) => {
     const question = e.target.parentNode.question.value
-
     dispatch(addQuestion(question, parentId))
   }
 
@@ -47,7 +47,6 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
 
   const addAnswerTextControlled = (e) => {
     const answer = e.target.parentNode.answer.value
-
     dispatch(addAnswer(answer, tId, parentId))
   }
 
@@ -62,9 +61,17 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
 
   // Тестовая зона
 
-  const rightClick = (e) => {
+  const rightClick = (e, tId, parentId) => {
     e.preventDefault()
-    alert('ПРАВАЯ КНОПКА МЫШИ!')
+    dispatch(dataForRelation(tId, parentId))
+
+    document.querySelector('.modal-window').style.display = 'block'
+    document.querySelector('.modal-window').style.top = `${e.clientY}`
+    document.querySelector('.modal-window').style.left = `${e.clientX}`
+  }
+
+  const chooseRelation = () => {
+    document.querySelector('.modal-window').style.display = 'none'
   }
 
   return (
@@ -72,6 +79,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
       {/* Обрабатываем вопросы */}
       {stringType === 'question' && (
         <div className={styles.questionInputStyle}>
+          <ModalWindow />
           {qInput && (
             <p
               onDoubleClick={addPreviousValue}
@@ -98,13 +106,15 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
       {/* Обрабатываем ответы  */}
       {stringType === 'answer' && (
         <div className={styles.answerHolder}>
+          <div className="modal-window" onClick={chooseRelation}></div>
+
           <div
             className={
               currentState[parentId].answers.length > 1
                 ? styles.answerInputStyle
                 : styles.lonelyAnswer
             }
-            onContextMenu={rightClick}
+            onContextMenu={(e) => rightClick(e, tId, parentId)}
           >
             {aInput && (
               <p
@@ -132,15 +142,6 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
                 </button>
               </form>
             )}
-
-            {/* {aInput && (
-            <button
-              onClick={addNewAnswer}
-              className={styles.addNewAnswerButton}
-            >
-              +
-            </button>
-          )} */}
           </div>
 
           {currentState[parentId].answers.length > 1 && (

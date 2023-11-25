@@ -18,6 +18,8 @@ export const ADD_RESULT_IMAGE = 'ADD_RESULT_IMAGE'
 export const ADD_RESULT_HEADER = 'ADD_RESULT_HEADER'
 export const ADD_RESULT_DESCRIPTION = 'ADD_RESULT_DESCRIPTION'
 export const REMOVE_RESULT_CARD = 'REMOVE_RESULT_CARD'
+
+export const DATA_FOR_RELATION = 'DATA_FOR_RELATION'
 export const SET_RESULT_RELATION = 'SET_RESULT_RELATION'
 
 //Базовые значения
@@ -116,9 +118,17 @@ export const addResultDescription = (resultDescription, resultCardId) => ({
   resultCardId,
 })
 
-export const setResultRelation = (resultId) => ({
+export const setResultRelation = (resultId, parentId, answerId) => ({
   type: SET_RESULT_RELATION,
   resultId,
+  answerId,
+  parentId,
+})
+
+export const dataForRelation = (answerId, parentId) => ({
+  type: DATA_FOR_RELATION,
+  answerId,
+  parentId,
 })
 
 //REDUCER
@@ -182,24 +192,6 @@ const testStore = (state = [], action) => {
         state[1][action.answerBlockId].answers[
           state[1][action.answerBlockId].answers.length - 1
         ].answerId
-
-      // state[1] = state[1].map((el) => {
-      //   if (el.id === action.answerBlockId) {
-      //     el.answers.push({
-      //       answerId: (newId += 1),
-      //       answer: 'Какой-то ответ',
-      //       answerRelation: 0,
-      //     })
-      //   }
-
-      //   return el
-      // })
-
-      // state[1][action.answerBlockId].answers.concat({
-      //   answerId: (newId += 1),
-      //   answer: 'Какой-то ответ',
-      //   answerRelation: 0,
-      // })
 
       return [
         state[0],
@@ -296,9 +288,6 @@ const testStore = (state = [], action) => {
       })
       return [...state]
 
-    case SET_RESULT_RELATION:
-      return [...state]
-
     case REMOVE_RESULT_CARD:
       state[0] = state[0].filter((el) => {
         return el.resId !== action.resultCardId
@@ -313,6 +302,43 @@ const testStore = (state = [], action) => {
       })
 
       return [...state]
+
+    case SET_RESULT_RELATION:
+      // resultId
+      // answerId
+      // parentId
+
+      const foundRes = state[0].find((el) => {
+        return el.resHeader === action.resultId
+      })
+
+      return [
+        state[0],
+        state[1].map((el) => {
+          if (el.id === action.parentId) {
+            el.answers.map((answer) => {
+              if (answer.answerId === action.answerId) {
+                answer.answerRelation = foundRes.resId
+              }
+              return el
+            })
+          }
+
+          return el
+        }),
+      ]
+
+    case DATA_FOR_RELATION:
+      // resultId
+      // answerId
+      // parentId
+      if (state.length === 2) {
+        return [...state, [action.parentId, action.answerId]]
+      } else {
+        state[2] = [action.parentId, action.answerId]
+
+        return [...state]
+      }
 
     default: {
       return state

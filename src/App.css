@@ -112,3 +112,37 @@ button {
   transform: scale(1);
   background-color: rgb(161, 224, 226);
 }
+
+/*Модальное окно*/
+.modal-window {
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
+  border-radius: 10px;
+  max-width: 700px;
+
+  max-height: 300px;
+  background-color: rgb(161, 224, 226);
+  color: aliceblue;
+  display: none;
+  flex-direction: row;
+  font-size: 0.8rem;
+  padding: 2px;
+  border: 5px solid cadetblue;
+  color: aliceblue;
+}
+
+.preview-holder {
+  max-width: 200px;
+  margin: 1rem;
+}
+
+.thumb-image img {
+  max-width: 200px;
+  width: 5rem;
+  margin-top: 3px;
+}
+
+.preview-holder:hover {
+  border: 1px solid aliceblue;
+}
