@@ -1,3 +1,4 @@
+import { act } from 'react-dom/test-utils'
 import { createStore } from 'redux'
 
 //CONSTANTS - константы, которые можно было бы вынести, но я не стал
@@ -143,25 +144,16 @@ const testStore = (state = [], action) => {
       )
 
     case REMOVE_TEST_CARD:
-      if (state[1].length > 1) {
-        if (action.testCardId === state[1][state.length - 1].id) {
-          state[1] = state[1].filter((el) => el.id !== action.testCardId)
+      console.log(action.testCardId)
 
-          return [...state]
-        } else {
-          state[1] = state[1].filter((el) => el.id !== action.testCardId)
-          state[1].map((el) => {
-            el.id === 0 ? (el.id = 0) : (el.id -= 1)
-            return [...state]
-          })
-        }
+      state[1] = state[1].filter((el) => {
+        return el.id !== action.testCardId
+      })
+      state[1].map((el) => {
+        el.id > action.testCardId ? (el.id -= 1) : (el.id = el.id)
+      })
 
-        return [...state]
-      } else {
-        state[1][0].id = 0
-
-        return [...state]
-      }
+      return [...state]
 
     case ADD_TEST_CARD:
       if (state.length === 0) {
@@ -191,13 +183,38 @@ const testStore = (state = [], action) => {
           state[1][action.answerBlockId].answers.length - 1
         ].answerId
 
-      state[1][action.answerBlockId].answers.push({
-        answerId: (newId += 1),
-        answer: '',
-        answerRelation: 0,
-      })
+      // state[1] = state[1].map((el) => {
+      //   if (el.id === action.answerBlockId) {
+      //     el.answers.push({
+      //       answerId: (newId += 1),
+      //       answer: 'Какой-то ответ',
+      //       answerRelation: 0,
+      //     })
+      //   }
 
-      return [...state]
+      //   return el
+      // })
+
+      // state[1][action.answerBlockId].answers.concat({
+      //   answerId: (newId += 1),
+      //   answer: 'Какой-то ответ',
+      //   answerRelation: 0,
+      // })
+
+      return [
+        state[0],
+        state[1].map((el) => {
+          if (el.id === action.answerBlockId) {
+            el.answers.push({
+              answerId: (newId += 1),
+              answer: 'Какой-то ответ',
+              answerRelation: 0,
+            })
+          }
+
+          return el
+        }),
+      ]
 
     case ADD_ANSWER:
       // textOftheAnswer,

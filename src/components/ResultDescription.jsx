@@ -1,53 +1,55 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addResultDescription } from './store/store';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addResultDescription } from './store/store'
 
-import styles from './styles/resultTextsInput.module.css';
+import styles from './styles/resultTextsInput.module.css'
 
 const ResultDescription = ({ cardId }) => {
-  const currentValue = useSelector(state => state[0]);
-  const dispatch = useDispatch();
-  const resultDescriptionText = currentValue[cardId].resDescr;
+  const currentValue = useSelector((state) => state[0])
+  const dispatch = useDispatch()
+  const resultDescriptionText = currentValue[cardId].resDescr
 
-  const [resDescr, setResDescr] = useState(false);
+  const [resDescr, setResDescr] = useState(false)
 
-  const addResultDescriptionValue = e => {
-    e.preventDefault();
+  const addResultDescriptionValue = (e) => {
+    e.preventDefault()
 
+    if (e.target.parentNode.resultDescriptionField.value.length !== 0) {
+      dispatch(
+        addResultDescription(
+          e.target.parentNode.resultDescriptionField.value,
+          cardId
+        )
+      )
+      e.target.parentNode.resultDescriptionField.value = ''
+      setResDescr(true)
+    }
+  }
+
+  const addResultDescriptionValueControlled = (e) => {
     dispatch(
       addResultDescription(
         e.target.parentNode.resultDescriptionField.value,
         cardId
       )
-    );
-    e.target.parentNode.resultDescriptionField.value = '';
-    setResDescr(true);
-  };
-
-  const addResultDescriptionValueControlled = e => {
-    dispatch(
-      addResultDescription(
-        e.target.parentNode.resultDescriptionField.value,
-        cardId
-      )
-    );
-  };
+    )
+  }
 
   return (
     <div
       className={styles.resultDescriptionInputStyle}
       onDoubleClick={() => {
-        setResDescr(false);
+        setResDescr(false)
       }}
-      title='Двойной клик для редактирования описания результата'
+      title="Двойной клик для редактирования описания результата"
     >
       {resDescr && <p>{resultDescriptionText}</p>}
       {!resDescr && (
         <form>
           <input
-            type='text'
-            name='resultDescriptionField'
-            placeholder='Описание результата'
+            type="text"
+            name="resultDescriptionField"
+            placeholder="Описание результата"
             onChange={addResultDescriptionValueControlled}
             value={resultDescriptionText}
           />
@@ -58,7 +60,7 @@ const ResultDescription = ({ cardId }) => {
         </form>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ResultDescription;
+export default ResultDescription

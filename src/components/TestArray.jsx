@@ -8,7 +8,7 @@ const TestArray = () => {
   return (
     <>
       {currentState.map((el) => {
-        return <TestPage el={el} />
+        return <TestPage el={el} key={el.id} />
       })}
     </>
   )

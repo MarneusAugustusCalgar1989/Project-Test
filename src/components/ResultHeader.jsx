@@ -1,40 +1,42 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addResultHeader } from './store/store';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { addResultHeader } from './store/store'
 
-import styles from './styles/resultTextsInput.module.css';
+import styles from './styles/resultTextsInput.module.css'
 
 const ResultHeader = ({ cardId }) => {
-  const currentValue = useSelector(state => state[0]);
-  const dispatch = useDispatch();
-  const resultHeaderText = currentValue[cardId].resHeader;
+  const currentValue = useSelector((state) => state[0])
+  const dispatch = useDispatch()
+  const resultHeaderText = currentValue[cardId].resHeader
 
-  const [resultHeader, setResultHeader] = useState(false);
+  const [resultHeader, setResultHeader] = useState(false)
 
-  const addResultHeaderValue = e => {
-    e.preventDefault();
+  const addResultHeaderValue = (e) => {
+    e.preventDefault()
 
+    if (e.target.parentNode.resultHeaderField.value.length !== 0) {
+      dispatch(
+        addResultHeader(e.target.parentNode.resultHeaderField.value, cardId)
+      )
+      e.target.parentNode.resultHeaderField.value = ''
+      setResultHeader(true)
+    }
+  }
+
+  const addResultHeaderValueControlled = (e) => {
     dispatch(
       addResultHeader(e.target.parentNode.resultHeaderField.value, cardId)
-    );
-    e.target.parentNode.resultHeaderField.value = '';
-    setResultHeader(true);
-  };
-
-  const addResultHeaderValueControlled = e => {
-    dispatch(
-      addResultHeader(e.target.parentNode.resultHeaderField.value, cardId)
-    );
-    e.target.parentNode.resultHeaderField.value = '';
-  };
+    )
+    e.target.parentNode.resultHeaderField.value = ''
+  }
 
   return (
     <div
       className={styles.resultHeaderInputStyle}
       onDoubleClick={() => {
-        setResultHeader(false);
+        setResultHeader(false)
       }}
-      title='Двойной клик, чтобы отредактировать результат'
+      title="Двойной клик, чтобы отредактировать результат"
     >
       {resultHeader && (
         <div>
@@ -44,9 +46,9 @@ const ResultHeader = ({ cardId }) => {
       {!resultHeader && (
         <form>
           <input
-            type='text'
-            name='resultHeaderField'
-            placeholder='Введите название результата'
+            type="text"
+            name="resultHeaderField"
+            placeholder="Введите название результата"
             onChange={addResultHeaderValueControlled}
             value={resultHeaderText}
           />
@@ -54,7 +56,7 @@ const ResultHeader = ({ cardId }) => {
         </form>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ResultHeader;
+export default ResultHeader

@@ -2,7 +2,7 @@ import React from 'react'
 import PictureInput from './PictureInput'
 import TypicalInput from './TypicalInput'
 import { useSelector, useDispatch } from 'react-redux'
-import { addTestCard, removeTestCard } from './store/store'
+import { addNewAnswerLine, addTestCard, removeTestCard } from './store/store'
 
 const TestPage = ({ el }) => {
   const currentState = useSelector((state) => state)
@@ -13,9 +13,34 @@ const TestPage = ({ el }) => {
     } else {
       dispatch(addTestCard(0))
     }
+    let body = document.body
+    let html = document.documentElement
+
+    setTimeout(() => {
+      let height = Math.max(
+        body.scrollHeight,
+        body.offsetHeight,
+        html.clientHeight,
+        html.scrollHeight,
+        html.offsetHeight
+      )
+      window.scrollBy({ top: height, behavior: 'smooth' })
+    }, 10)
   }
+
   const removeCard = (el) => {
     dispatch(removeTestCard(el))
+  }
+
+  const addNewAnswer = (e) => {
+    dispatch(addNewAnswerLine(el.id))
+    let heightAns = document.documentElement.clientHeight
+    let clientPoint = e.clientY
+    if (heightAns - clientPoint < 100) {
+      setTimeout(() => {
+        window.scrollBy({ top: 100, behavior: 'smooth' })
+      }, 10)
+    }
   }
 
   return (
@@ -27,14 +52,16 @@ const TestPage = ({ el }) => {
           </h1>
         </div>
 
-        <button
-          className="remove-test-card"
-          onClick={() => removeCard(el.id)}
-          key={el.id + 'remove-test-card'}
-          title={`Удалить карточку с вопросом №${el.id + 1}`}
-        >
-          &#215;
-        </button>
+        {currentState[1].length > 1 && (
+          <button
+            className="remove-test-card"
+            onClick={() => removeCard(el.id)}
+            key={el.id + 'remove-test-card'}
+            title={`Удалить карточку с вопросом №${el.id + 1}`}
+          >
+            &#215;
+          </button>
+        )}
 
         <PictureInput
           typeOfUsing="questionPicture"
@@ -59,6 +86,9 @@ const TestPage = ({ el }) => {
             />
           )
         })}
+        <button onClick={addNewAnswer} className="addNewAnswerButton">
+          +
+        </button>
       </div>
 
       <button className="add-test-card" onClick={addCard}>
