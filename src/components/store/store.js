@@ -22,6 +22,8 @@ export const REMOVE_RESULT_CARD = 'REMOVE_RESULT_CARD'
 export const DATA_FOR_RELATION = 'DATA_FOR_RELATION'
 export const SET_RESULT_RELATION = 'SET_RESULT_RELATION'
 
+export const PREVIEW_COUNTER = 'PREVIEW_COUNTER'
+
 //Базовые значения
 
 const initValue = [
@@ -31,6 +33,7 @@ const initValue = [
       resHeader: '',
       resDescr: '',
       resImg: 'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
+      resCount: 0,
     },
   ],
   [
@@ -129,6 +132,11 @@ export const dataForRelation = (answerId, parentId) => ({
   type: DATA_FOR_RELATION,
   answerId,
   parentId,
+})
+
+export const previewCounter = (answerRelation) => ({
+  type: PREVIEW_COUNTER,
+  answerRelation,
 })
 
 //REDUCER
@@ -254,6 +262,7 @@ const testStore = (state = [], action) => {
         resDescr: '',
         resImg:
           'https://obzor.city/data/images/news_2023/zgl/hackaton/gotor.jpg',
+        resCount: 0,
       })
 
       return [...state]
@@ -339,6 +348,19 @@ const testStore = (state = [], action) => {
 
         return [...state]
       }
+
+    case PREVIEW_COUNTER:
+      // answerRelation
+
+      return [
+        state[0].map((el) => {
+          if (el.resId === action.answerRelation) {
+            el.resCount += 1
+          }
+          return el
+        }),
+        state[1],
+      ]
 
     default: {
       return state

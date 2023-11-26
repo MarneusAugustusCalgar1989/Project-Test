@@ -105,7 +105,10 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
       )}
       {/* Обрабатываем ответы  */}
       {stringType === 'answer' && (
-        <div className={styles.answerHolder}>
+        <div
+          className={styles.answerHolder}
+          onContextMenu={(e) => rightClick(e, tId, parentId)}
+        >
           <div className="modal-window" onClick={chooseRelation}></div>
 
           <div
@@ -114,7 +117,6 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
                 ? styles.answerInputStyle
                 : styles.lonelyAnswer
             }
-            onContextMenu={(e) => rightClick(e, tId, parentId)}
           >
             {aInput && (
               <p

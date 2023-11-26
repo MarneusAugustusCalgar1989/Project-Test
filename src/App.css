@@ -71,6 +71,27 @@ button {
   background-color: cadetblue;
 }
 
+.active-button {
+  background-color: rgb(161, 224, 226);
+  color: cadetblue;
+}
+
+.navigate {
+  transition: all 0.3s ease-in-out;
+}
+
+.navigate:hover {
+  color: cadetblue;
+  background-color: rgb(161, 224, 226);
+  transform: scale(1.2);
+}
+
+.navigate:active {
+  -webkit-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  -moz-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+}
+
 .remove-test-card {
   margin-left: 95%;
   margin-bottom: 0.1rem;

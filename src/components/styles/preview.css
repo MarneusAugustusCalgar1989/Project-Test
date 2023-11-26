@@ -1,0 +1,87 @@
+.test-preview-holder {
+  background-color: azure;
+
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-self: center;
+  color: cadetblue;
+}
+
+.tCard {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.iCard {
+  background-color: rgb(161, 224, 226);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -2rem;
+}
+
+.iCard img {
+  width: 95%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+}
+
+.qCard {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  cursor: default;
+  border-radius: 10px;
+
+  background-color: cadetblue;
+  color: white;
+  font-size: 2rem;
+}
+.qCard p {
+  padding: 1rem;
+}
+
+.aCard {
+  width: 80%;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+
+  background-color: rgb(161, 224, 226);
+  color: aliceblue;
+  font-size: 1.5rem;
+}
+
+.aCard:hover {
+  -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.aCard:active {
+  -webkit-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  -moz-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+}
