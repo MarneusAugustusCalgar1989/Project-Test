@@ -3,6 +3,7 @@ import './App.css'
 import ResultsArray from './components/ResultsArray'
 import TestArray from './components/TestArray'
 import TestPreview from './components/TestPreview'
+import TestBeauty from './components/TestBeauty'
 
 function App() {
   const [route, setRoute] = useState(['test', 'results', 'preview'])
@@ -21,7 +22,7 @@ function App() {
   }
 
   window.addEventListener('load', () => {
-    setRoute('preview')
+    setRoute('beauty')
   })
 
   return (
@@ -54,11 +55,21 @@ function App() {
         >
           Превью
         </button>
+        <button
+          className="navigate"
+          onClick={(e) => {
+            navBarDecor(e)
+            setRoute('beauty')
+          }}
+        >
+          BEAUTY
+        </button>
       </div>
 
       {route === 'test' && <TestArray />}
       {route === 'results' && <ResultsArray />}
       {route === 'preview' && <TestPreview />}
+      {route === 'beauty' && <TestBeauty />}
     </div>
   )
 }

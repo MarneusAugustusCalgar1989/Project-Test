@@ -24,6 +24,10 @@ export const SET_RESULT_RELATION = 'SET_RESULT_RELATION'
 
 export const PREVIEW_COUNTER = 'PREVIEW_COUNTER'
 
+export const RESET_RESULTS = 'RESET_RESULTS'
+
+export const UPDATE_STORE = 'UPDATE_STORE'
+
 //Базовые значения
 
 const initValue = [
@@ -137,6 +141,14 @@ export const dataForRelation = (answerId, parentId) => ({
 export const previewCounter = (answerRelation) => ({
   type: PREVIEW_COUNTER,
   answerRelation,
+})
+
+export const resetResults = () => ({
+  type: RESET_RESULTS,
+})
+
+export const updateStore = () => ({
+  type: UPDATE_STORE,
 })
 
 //REDUCER
@@ -361,6 +373,20 @@ const testStore = (state = [], action) => {
         }),
         state[1],
       ]
+
+    case RESET_RESULTS:
+      return [
+        state[0].map((el) => {
+          el.resCount = 0
+          return el
+        }),
+        state[1],
+      ]
+
+    case UPDATE_STORE:
+      console.log('update!')
+
+      return [...state, [true]]
 
     default: {
       return state

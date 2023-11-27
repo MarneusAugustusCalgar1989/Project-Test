@@ -1,4 +1,4 @@
-import { previewCounter } from './store/store'
+import { previewCounter, resetResults } from './store/store'
 import './styles/preview.css'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -7,9 +7,14 @@ const TestPreview = () => {
   const testResult = useSelector((state) => state[0])
   const dispatch = useDispatch()
 
+  const resetResultButton = (e) => {
+    dispatch(resetResults())
+  }
+
   const makeDecisionBut = (e) => {
     const parentContent =
-      e.target.parentNode.parentNode.querySelector('.qCard').textContent
+      e.target.parentNode.querySelector('.qCard').textContent
+
     const clientAnswer = e.target.textContent
 
     const findParent = testObj.find((el) => {
@@ -19,9 +24,8 @@ const TestPreview = () => {
     const findChild = findParent.answers.find((ans) => {
       return ans.answer === clientAnswer
     })
-    dispatch(previewCounter(findChild.answerRelation))
 
-    console.log(findChild.answerRelation)
+    dispatch(previewCounter(findChild.answerRelation))
   }
 
   return (
@@ -53,18 +57,28 @@ const TestPreview = () => {
       <h1>Далее пока лежит дефолтный результат</h1>
 
       <div className="test-preview-holder">
-        <div className="tCard">
-          <h1>{testResult[0].resHeader} </h1>
-          <div className="iCard">
-            <img src={testResult[0].resImg} alt="Картинка к результату" />
-          </div>
-          <div className="qCard">
-            <p>{testResult[0].resHeader}</p>
-          </div>
-          <div className="aCard">
-            <p>{testResult[0].resDescr}</p>
-          </div>
-        </div>
+        {testResult.map((el) => {
+          return (
+            <div className="tCard result">
+              <h1>
+                {el.resHeader} {el.resCount}
+              </h1>
+              <div className="iCard">
+                <img src={el.resImg} alt="Картинка к результату" />
+              </div>
+              <div className="aCardresult">
+                <p>{el.resDescr}</p>
+              </div>
+
+              <div className="qCard result">
+                <p>{el.resHeader}</p>
+              </div>
+            </div>
+          )
+        })}
+        <button className="reset" onClick={resetResultButton}>
+          Сбросить результаты
+        </button>
       </div>
     </>
   )
