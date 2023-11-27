@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { addNewAnswerLine, addTestCard, removeTestCard } from './store/store'
 
 const TestPage = ({ el }) => {
-  const currentState = useSelector((state) => state)
+  const currentState = useSelector((state) => state[1])
   const dispatch = useDispatch()
   const addCard = (e) => {
     if (currentState.length !== 0) {
