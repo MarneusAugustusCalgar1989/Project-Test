@@ -40,7 +40,7 @@ const ResultHeader = ({ cardId }) => {
     >
       {resultHeader && (
         <div>
-          <p>{resultHeaderText}</p>
+          <h3>{resultHeaderText}</h3>
         </div>
       )}
       {!resultHeader && (

@@ -24,6 +24,7 @@ const TestPreview = () => {
     const findChild = findParent.answers.find((ans) => {
       return ans.answer === clientAnswer
     })
+    console.log(parentContent)
 
     dispatch(previewCounter(findChild.answerRelation))
   }
@@ -39,6 +40,7 @@ const TestPreview = () => {
               <div className="iCard">
                 <img src={el.questionImage} alt="Картинка к вопросу" />
               </div>
+
               <div className="qCard">
                 <p>{el.question}</p>
               </div>
@@ -54,7 +56,7 @@ const TestPreview = () => {
         })}
       </div>
 
-      <h1>Далее пока лежит дефолтный результат</h1>
+      <h1 className="divider">Далее пока лежит дефолтный результат</h1>
 
       <div className="test-preview-holder">
         {testResult.map((el) => {
@@ -66,6 +68,7 @@ const TestPreview = () => {
               <div className="iCard">
                 <img src={el.resImg} alt="Картинка к результату" />
               </div>
+
               <div className="aCardresult">
                 <p>{el.resDescr}</p>
               </div>
