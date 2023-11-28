@@ -136,13 +136,10 @@ button {
 
 /*Модальное окно*/
 .modal-window {
-  position: fixed;
-  top: 10vh;
-  left: 10vw;
+  position: absolute;
   border-radius: 10px;
   max-width: 700px;
 
-  max-height: 300px;
   background-color: rgb(161, 224, 226);
   color: aliceblue;
   display: none;
