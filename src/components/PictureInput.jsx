@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addQuestionImageUrl } from './store/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMainUrl, addQuestionImageUrl } from './store/store';
 import styles from './styles/pictureInput.module.css';
 
 const PictureInput = ({ imgSrc, parentId, typeOfUsing }) => {
   const dispatch = useDispatch();
+  const currentState = useSelector(state => state[2]);
   const [pInput, setPinput] = useState(false);
-  const [mainSrc, setMainSrc] = useState(
-    'https://obzor.city/data/images/news_2023/11/1/kolupaev.jpg'
-  );
 
   const addImgUrl = e => {
     e.preventDefault();
     const inputUrl = e.target.parentNode.pictureUrl.value;
 
     if (inputUrl.length !== 0) {
-      typeOfUsing === 'questionPicture'
-        ? dispatch(addQuestionImageUrl(inputUrl, parentId))
-        : setMainSrc(inputUrl);
+      dispatch(addQuestionImageUrl(inputUrl, parentId));
+
       e.target.parentNode.pictureUrl.value = '';
       setPinput(true);
     }
+  };
+
+  const addMainImageUrl = e => {
+    e.preventDefault();
+    const inputUrl = e.target.parentNode.pictureUrl.value;
+    if (inputUrl !== '') {
+      dispatch(addMainUrl(inputUrl));
+    }
+    setPinput(true);
   };
 
   return (
@@ -31,8 +37,16 @@ const PictureInput = ({ imgSrc, parentId, typeOfUsing }) => {
         }}
       >
         <img
-          src={typeOfUsing === 'questionPicture' ? imgSrc : mainSrc}
-          alt={`Вы пытались загрузить картинку по ссылке ${imgSrc}`}
+          src={
+            typeOfUsing === 'questionPicture'
+              ? imgSrc
+              : currentState[0].mainPageUrl
+          }
+          alt={`Вы пытались загрузить картинку по ссылке ${
+            typeOfUsing === 'questionPicture'
+              ? imgSrc
+              : currentState[0].mainPageUrl
+          }`}
         />
       </div>
 
@@ -43,7 +57,12 @@ const PictureInput = ({ imgSrc, parentId, typeOfUsing }) => {
             name='pictureUrl'
             placeholder='Надо добавить ссылку на картинку'
           />
-          <button className='addImageUrl' onClick={addImgUrl}>
+          <button
+            className='addImageUrl'
+            onClick={
+              typeOfUsing === 'questionPicture' ? addImgUrl : addMainImageUrl
+            }
+          >
             {' '}
             Добавить{' '}
           </button>

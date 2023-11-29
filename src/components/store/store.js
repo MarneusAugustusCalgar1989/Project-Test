@@ -49,6 +49,12 @@ const initValue = [
       answers: [{ answerId: 0, answer: 'Текст ответа', answerRelation: 0 }],
     },
   ],
+  [
+    {
+      mainPageUrl: 'https://obzor.city/data/images/news_2023/11/1/kolupaev.jpg',
+      nameOfTest: 'Тест № 1',
+    },
+  ],
 ];
 
 //ACTION CREATORS
@@ -416,12 +422,28 @@ const testStore = (state = [], action) => {
       ];
 
     case ADD_MAIN_URL:
-      console.log('Add url');
-      return [...state];
+      return [
+        state[0],
+        state[1],
+        state[2].map(el => {
+          if (el) {
+            el.mainPageUrl = action.mainUrl;
+          }
+          return el;
+        }),
+      ];
 
     case ADD_TEST_NAME:
-      console.log('add name');
-      return [...state];
+      return [
+        state[0],
+        state[1],
+        state[2].map(el => {
+          if (el) {
+            el.nameOfTest = action.testName;
+          }
+          return el;
+        }),
+      ];
 
     default: {
       return state;

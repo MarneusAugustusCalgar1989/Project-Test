@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   addAnswer,
   addQuestion,
+  addTestName,
   dataForRelation,
   removeAnswer,
 } from './store/store';
@@ -13,6 +14,7 @@ import ModalWindow from './ModalWindow';
 const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
   const dispatch = useDispatch();
   const currentState = useSelector(state => state[1]);
+  const mainPageState = useSelector(state => state[2]);
 
   const [qInput, setQinput] = useState(false);
   const [aInput, setAinput] = useState(false);
@@ -55,6 +57,26 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
 
   const removeSelectedAnswer = e => {
     dispatch(removeAnswer(parentId, tId));
+  };
+
+  const addNameOfTest = e => {
+    e.preventDefault();
+    const testName = e.target.parentNode.nameOfTestField.value;
+    console.log(testName);
+
+    if (testName.length > 1) {
+      dispatch(addTestName(testName.toUpperCase()));
+      setQinput(true);
+      e.target.parentNode.nameOfTestField.value =
+        mainPageState[0].addNameOfTest;
+    } else {
+      dispatch(addTestName('Здесь должно что-то быть'));
+    }
+  };
+
+  const addNameOfTestControlled = e => {
+    const testName = e.target.parentNode.nameOfTestField.value;
+    dispatch(addTestName(testName));
   };
 
   // Тестовая зона
@@ -161,27 +183,28 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           )}
         </div>
       )}
+      {/* Обрабатываем начальную кнопку */}
       {stringType === 'mainPage' && (
         <div className={styles.questionInputStyle}>
           {qInput && (
-            <h3
+            <h2
               onDoubleClick={addPreviousValue}
               title='Двойной клик для редактирования содержания'
             >
-              {tCont}
-            </h3>
+              {mainPageState[0].nameOfTest}
+            </h2>
           )}
           {!qInput && (
             <form>
               <input
                 className='testQuest'
                 type='text'
-                name='question'
+                name='nameOfTestField'
                 placeholder='Введите название'
-                onChange={addTextQuestionControlled}
-                value={tCont}
+                onChange={addNameOfTestControlled}
+                value={mainPageState[0].nameOfTest}
               />
-              <button onClick={addTextQuestion}> Добавить вопрос </button>
+              <button onClick={addNameOfTest}> Добавить вопрос </button>
             </form>
           )}
         </div>

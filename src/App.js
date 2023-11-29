@@ -8,6 +8,7 @@ import MainPage from './components/MainPage';
 
 function App() {
   const [route, setRoute] = useState(['test', 'results', 'preview']);
+
   const navBarDecor = e => {
     for (
       let i = 0;
@@ -23,14 +24,15 @@ function App() {
   };
 
   window.addEventListener('load', () => {
-    setRoute('test');
+    setRoute('mainPage');
+    document.querySelector('.first').classList.add('active-button');
   });
 
   return (
     <div className='App'>
       <div className='button-holder'>
         <button
-          className='navigate'
+          className='navigate first'
           onClick={e => {
             navBarDecor(e);
             setRoute('mainPage');
@@ -38,6 +40,7 @@ function App() {
         >
           Заглавная
         </button>
+
         <button
           className='navigate'
           onClick={e => {
@@ -47,6 +50,7 @@ function App() {
         >
           Тест
         </button>
+
         <button
           className='navigate'
           onClick={e => {
@@ -76,7 +80,6 @@ function App() {
         </button>
       </div>
       {route === 'mainPage' && <MainPage />}
-
       {route === 'test' && <TestArray />}
       {route === 'results' && <ResultsArray />}
       {route === 'preview' && <TestPreview />}
