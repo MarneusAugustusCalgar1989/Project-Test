@@ -4,11 +4,15 @@ import './styles/preview-beauty.css'
 import { useDispatch, useSelector } from 'react-redux'
 
 const TestBeauty = () => {
-  const [reloadHandler, setReloadHandler] = useState(false)
+  const [showMainPage, setShowMainPage] = useState(true)
+  const [showTest, setShowTest] = useState(false)
   const [showResult, setShowResult] = useState(false)
 
-  const testObj = useSelector((state) => state[1])
+  const [reloadHandler, setReloadHandler] = useState(false)
+
   const testResult = useSelector((state) => state[0])
+  const testObj = useSelector((state) => state[1])
+  const mainPageObj = useSelector((state) => state[2])
   const dispatch = useDispatch()
 
   const makeDecisionBut = (e) => {
@@ -82,30 +86,62 @@ const TestBeauty = () => {
 
   return (
     <>
-      <div className="test-preview-holder-beauty">
-        {testObj.map((el) => {
-          return (
+      {/* Это первая страница */}
+      {showMainPage && (
+        <>
+          <div className="test-preview-holder-beauty">
             <div className="tCardBeauty">
-              <h1>Вопрос № {el.id + 1}</h1>
-
               <div className="iCard">
-                <img src={el.questionImage} alt="Картинка к вопросу" />
+                <img
+                  src={mainPageObj[0].mainPageUrl}
+                  alt="Заглавная картинка"
+                />
               </div>
               <div className="qCard">
-                <p>{el.question}</p>
+                <h2>{mainPageObj[0].nameOfTest}</h2>
               </div>
-              {el.answers.map((ans) => {
-                return (
-                  <div className="aCard" onClick={makeDecisionBut}>
-                    {ans.answer}
-                  </div>
-                )
-              })}
+              <div
+                className="lets-play-button"
+                onClick={() => {
+                  setShowMainPage(false)
+                  setShowTest(true)
+                }}
+              >
+                {' '}
+                Начать тест{' '}
+              </div>
             </div>
-          )
-        })}
-      </div>
+          </div>
+        </>
+      )}
 
+      {/* Это тест */}
+      {showTest && (
+        <div className="test-preview-holder-beauty">
+          {testObj.map((el) => {
+            return (
+              <div className="tCardBeauty">
+                <h1>Вопрос № {el.id + 1}</h1>
+
+                <div className="iCard">
+                  <img src={el.questionImage} alt="Картинка к вопросу" />
+                </div>
+                <div className="qCard">
+                  <p>{el.question}</p>
+                </div>
+                {el.answers.map((ans) => {
+                  return (
+                    <div className="aCard" onClick={makeDecisionBut}>
+                      {ans.answer}
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
+        </div>
+      )}
+      {/* Это результаты */}
       {showResult && (
         <div className="test-preview-holder-beauty">
           {testResult.map((el) => {

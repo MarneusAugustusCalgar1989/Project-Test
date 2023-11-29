@@ -32,9 +32,36 @@
   transition: all 1s ease-in-out;
 }
 
-/* .tCard.result {
-  margin-top: 6rem;
-} */
+.lets-play-button {
+  width: 20rem;
+  padding: 2rem;
+  font-size: 2rem;
+  color: azure;
+
+  background-color: rgb(161, 224, 226);
+  margin-top: -2rem;
+  margin-bottom: 2rem;
+  border-radius: 10px;
+  -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+  transition: all 1s ease-in-out;
+}
+
+.lets-play-button:hover {
+  transform: scale(1.2);
+}
+
+.lets-play-button:active {
+  transform: scale(1);
+  background-color: azure;
+  color: cadetblue;
+
+  -webkit-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  -moz-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+  box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+}
 
 .iCard {
   background-color: rgb(161, 224, 226);

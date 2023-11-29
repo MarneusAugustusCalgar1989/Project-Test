@@ -164,3 +164,8 @@ button {
 .preview-holder:hover {
   border: 1px solid aliceblue;
 }
+
+.main-page-h1-divider {
+  color: cadetblue;
+  margin: 2rem;
+}
