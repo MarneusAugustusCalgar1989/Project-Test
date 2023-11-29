@@ -1,84 +1,83 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addAnswer,
   addQuestion,
   dataForRelation,
   removeAnswer,
-} from './store/store'
+} from './store/store';
 
-import styles from './styles/typicalInput.module.css'
-import ModalWindow from './ModalWindow'
+import styles from './styles/typicalInput.module.css';
+import ModalWindow from './ModalWindow';
 
 const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
-  const dispatch = useDispatch()
-  const currentState = useSelector((state) => state[1])
+  const dispatch = useDispatch();
+  const currentState = useSelector(state => state[1]);
 
-  const [qInput, setQinput] = useState(false)
-  const [aInput, setAinput] = useState(false)
+  const [qInput, setQinput] = useState(false);
+  const [aInput, setAinput] = useState(false);
 
   // Добавляем вопрос
-  const addTextQuestion = (e) => {
-    e.preventDefault()
-    const question = e.target.parentNode.question.value
+  const addTextQuestion = e => {
+    e.preventDefault();
+    const question = e.target.parentNode.question.value;
 
     if (question.length !== 0) {
-      dispatch(addQuestion(question, parentId))
-      setQinput(true)
+      dispatch(addQuestion(question, parentId));
+      setQinput(true);
     }
-  }
-  const addTextQuestionControlled = (e) => {
-    const question = e.target.parentNode.question.value
-    dispatch(addQuestion(question, parentId))
-  }
+  };
+  const addTextQuestionControlled = e => {
+    const question = e.target.parentNode.question.value;
+    dispatch(addQuestion(question, parentId));
+  };
 
   // Добавляем ответы
-  const addAnswerText = (e) => {
-    e.preventDefault()
-    const answer = e.target.parentNode.answer.value
+  const addAnswerText = e => {
+    e.preventDefault();
+    const answer = e.target.parentNode.answer.value;
 
     if (answer.length !== 0) {
-      dispatch(addAnswer(answer, tId, parentId))
-      setAinput(true)
-      e.target.parentNode.answer.value = tCont
+      dispatch(addAnswer(answer, tId, parentId));
+      setAinput(true);
+      e.target.parentNode.answer.value = tCont;
     }
-  }
+  };
 
-  const addAnswerTextControlled = (e) => {
-    const answer = e.target.parentNode.answer.value
-    dispatch(addAnswer(answer, tId, parentId))
-  }
+  const addAnswerTextControlled = e => {
+    const answer = e.target.parentNode.answer.value;
+    dispatch(addAnswer(answer, tId, parentId));
+  };
 
-  const addPreviousValue = (e) => {
-    setQinput(false)
-    console.log(e.target.parentNode.querySelector('form'))
-  }
+  const addPreviousValue = e => {
+    setQinput(false);
+  };
 
-  const removeSelectedAnswer = (e) => {
-    dispatch(removeAnswer(parentId, tId))
-  }
+  const removeSelectedAnswer = e => {
+    dispatch(removeAnswer(parentId, tId));
+  };
 
   // Тестовая зона
 
   const rightClick = (e, tId, parentId) => {
-    e.preventDefault()
-    dispatch(dataForRelation(tId, parentId))
+    e.preventDefault();
+    dispatch(dataForRelation(tId, parentId));
 
-    document.querySelector('.modal-window').style.display = 'block'
-    const windowSize = document.querySelector('.modal-window')
-    console.log(windowSize.getBoundingClientRect().width)
+    document.querySelector('.modal-window').style.display = 'block';
+    const windowSize = document.querySelector('.modal-window');
+    console.log(windowSize.getBoundingClientRect().width);
 
     document.querySelector('.modal-window').style.top = `${
       e.pageY - windowSize.getBoundingClientRect().height / 2
-    }px`
+    }px`;
     document.querySelector('.modal-window').style.left = `${
       e.clientX - windowSize.getBoundingClientRect().width / 2
-    }px`
-  }
+    }px`;
+  };
 
   const chooseRelation = () => {
-    document.querySelector('.modal-window').style.display = 'none'
-  }
+    document.querySelector('.modal-window').style.display = 'none';
+  };
 
   return (
     <>
@@ -89,7 +88,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           {qInput && (
             <h3
               onDoubleClick={addPreviousValue}
-              title="Двойной клик для редактирования содержания"
+              title='Двойной клик для редактирования содержания'
             >
               {tCont}
             </h3>
@@ -97,10 +96,10 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           {!qInput && (
             <form>
               <input
-                className="testQuest"
-                type="text"
-                name="question"
-                placeholder="Введите текст вопроса"
+                className='testQuest'
+                type='text'
+                name='question'
+                placeholder='Введите текст вопроса'
                 onChange={addTextQuestionControlled}
                 value={tCont}
               />
@@ -113,9 +112,9 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
       {stringType === 'answer' && (
         <div
           className={styles.answerHolder}
-          onContextMenu={(e) => rightClick(e, tId, parentId)}
+          onContextMenu={e => rightClick(e, tId, parentId)}
         >
-          <div className="modal-window" onClick={chooseRelation}></div>
+          <div className='modal-window' onClick={chooseRelation}></div>
 
           <div
             className={
@@ -127,7 +126,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
             {aInput && (
               <p
                 onDoubleClick={() => setAinput(false)}
-                title="Двойной клик для редактирования ответа"
+                title='Двойной клик для редактирования ответа'
               >
                 {tCont}
               </p>
@@ -136,9 +135,9 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
             {!aInput && (
               <form>
                 <input
-                  type="text"
-                  name="answer"
-                  placeholder="Введите текст ответа"
+                  type='text'
+                  name='answer'
+                  placeholder='Введите текст ответа'
                   value={tCont}
                   onChange={addAnswerTextControlled}
                 />
@@ -162,8 +161,33 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           )}
         </div>
       )}
+      {stringType === 'mainPage' && (
+        <div className={styles.questionInputStyle}>
+          {qInput && (
+            <h3
+              onDoubleClick={addPreviousValue}
+              title='Двойной клик для редактирования содержания'
+            >
+              {tCont}
+            </h3>
+          )}
+          {!qInput && (
+            <form>
+              <input
+                className='testQuest'
+                type='text'
+                name='question'
+                placeholder='Введите название'
+                onChange={addTextQuestionControlled}
+                value={tCont}
+              />
+              <button onClick={addTextQuestion}> Добавить вопрос </button>
+            </form>
+          )}
+        </div>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default TypicalInput
+export default TypicalInput;
