@@ -393,13 +393,16 @@ const testStore = (state = [], action) => {
       // resultId
       // answerId
       // parentId
-      if (state.length === 3) {
-        return [...state, [action.parentId, action.answerId]]
-      } else {
-        state[3] = [action.parentId, action.answerId]
 
-        return [...state]
-      }
+      // if (state.length === 3) {
+      //   return [...state, [action.parentId, action.answerId]]
+      // } else {
+      //   state[3] = [action.parentId, action.answerId]
+
+      //   return [...state]
+      // }
+
+      return [...state, [action.parentId, action.answerId]]
 
     case PREVIEW_COUNTER:
       // answerRelation

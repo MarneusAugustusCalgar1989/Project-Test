@@ -8,7 +8,7 @@ const ModalWindow = () =>
     const dispatch = useDispatch()
 
     const currentValue = useSelector((state) => state[0])
-    const relationState = useSelector((state) => state[2])
+    const relationState = useSelector((state) => state[3])
 
     const resetWindow = (e) => {
       if (e.key === 'Escape') {
