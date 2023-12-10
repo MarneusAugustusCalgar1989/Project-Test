@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToOut</title>
+  </head>
+  <body>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .test-preview-holder-beauty :first-child {
+        display: flex;
+      }
+
+      .test-preview-holder-beauty {
+        background-color: azure;
+        min-height: 100vh;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: cadetblue;
+        margin-top: -4rem;
+        animation: fade-in 0.5s ease-in-out 1;
+      }
+
+      .tCardBeauty {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        display: none;
+
+        transition: all 1s ease-in-out;
+      }
+
+      .lets-play-button {
+        width: 20rem;
+        padding: 2rem;
+        font-size: 2rem;
+        color: azure;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background-color: rgb(161, 224, 226);
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+        border-radius: 10px;
+        -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        cursor: pointer;
+        transition: all 1s ease-in-out;
+      }
+
+      .lets-play-button:hover {
+        transform: scale(1.2);
+      }
+
+      .lets-play-button:active {
+        transform: scale(1);
+        background-color: azure;
+        color: cadetblue;
+
+        -webkit-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+        -moz-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+        box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+      }
+
+      .iCard {
+        background-color: rgb(161, 224, 226);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: -2rem;
+      }
+
+      .iCard img {
+        width: 95%;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+      }
+
+      .qCard {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        cursor: default;
+        border-radius: 10px;
+        padding: 2rem;
+
+        background-color: cadetblue;
+        color: white;
+        font-size: 2rem;
+      }
+
+      .qCard.result {
+        padding: 0.5rem;
+        margin-top: 1rem;
+        min-height: 7rem;
+        -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+      }
+
+      .aCard {
+        width: 80%;
+        min-height: 5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        border-radius: 10px;
+
+        background-color: rgb(161, 224, 226);
+        color: aliceblue;
+        font-size: 1.5rem;
+      }
+
+      .aCardresult {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: rgb(161, 224, 226);
+        color: aliceblue;
+        font-size: 1.5rem;
+
+        margin-bottom: -15rem;
+        min-height: 7rem;
+        -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+      }
+
+      .aCard:hover {
+        -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+        box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+      }
+
+      .aCard:active {
+        background-color: cadetblue;
+
+        -webkit-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+        -moz-box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+        box-shadow: 4px -4px 25px 0px rgba(34, 60, 80, 0.2) inset;
+      }
+
+      .reset {
+        margin-top: 6rem;
+        margin-bottom: 5rem;
+      }
+
+      .card-in {
+        background-color: pink;
+      }
+
+      .beauty-again-button {
+        margin-top: 5rem;
+      }
+
+      .itog {
+        visibility: hidden;
+      }
+
+      .test-card-result-holder {
+        background-color: red;
+      }
+
+      .ancor-block {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 7rem;
+      }
+
+      .fade-in-item {
+        animation: fade-in .5s ease-in-out;
+        
+      }
+
+      .fade-out-item {
+        animation: fade-out 1s ease-in-out 1;
+      }
+
+      .el-out {
+        animation: fade-out 0.5s ease-in-out;
+      }
+      .testQuery{
+        display: none;
+        margin-top: 3rem;
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fade-out {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+
+    <div>
+      <div class="test-preview-holder-beauty">
+        <div class="tCardBeauty">
+          <div class="iCard">
+            <img
+              class="main-page-image-url"
+              src=""
+              alt="Заглавная картинка"
+            />
+          </div>
+          <div class="qCard">
+            <h2 class="test-header"></h2>
+          </div>
+          <div class="lets-play-button">Начать тест</div>
+        </div>
+        <div class='testQuery tCardBeauty' style = 'display:none'>
+          <h1 class = 'question-counter'>Вопрос № </h1>
+
+          <div class='iCard'>
+            <img class = "question-page-image-url" src="" alt='Картинка к вопросу' />
+          </div>
+          <div class='qCard'>
+            <p>Вопрос</p>
+          </div>            
+              <div class='aCard'>
+                Ответ
+              </div>
+           </div>
+
+      </div>
+    </div>
+
+
+        
+    </div>
+
+
+    
+
+    <script>
+      const testObj = [
+        [
+          {
+            resId: 0,
+            resHeader: 'Первый результат',
+            resDescr: 'Описание первого результата',
+            resImg:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_2_.jpg',
+            resCount: 0,
+          },
+          {
+            resId: 1,
+            resHeader: 'Второй результат',
+            resDescr: 'Описание второго результата',
+            resImg:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_5_.jpg',
+            resCount: 0,
+          },
+          {
+            resId: 2,
+            resHeader: 'Третий результат',
+            resDescr: 'Описание третьего результата',
+            resImg:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_6_.jpg',
+            resCount: 0,
+          },
+        ],
+        [
+          {
+            id: 0,
+            questionImage:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_9_.jpg',
+            question: 'Первый вопрос ',
+            answers: [
+              {
+                answerId: 0,
+                answer: 'Первый ответ первого вопроса',
+                answerRelation: 0,
+              },
+              {
+                answerId: 1,
+                answer: 'Второй ответ первого вопроса',
+                answerRelation: 1,
+              },
+              {
+                answerId: 2,
+                answer: 'Третий ответ первого вопроса',
+                answerRelation: 2,
+              },
+            ],
+          },
+          {
+            id: 1,
+            questionImage:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_4_.jpg',
+            question: 'Второй вопрос',
+            answers: [
+              {
+                answerId: 0,
+                answer: 'Первый ответ второго вопроса',
+                answerRelation: 0,
+              },
+              {
+                answerId: 1,
+                answer: 'Второй ответ второго вопроса',
+                answerRelation: 1,
+              },
+              {
+                answerId: 2,
+                answer: 'Третий ответ второго вопроса',
+                answerRelation: 2,
+              },
+            ],
+          },
+        ],
+        [
+          {
+            mainPageUrl:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_1_.jpg',
+            nameOfTest: 'ТЕСТОВЫЙ ТЕСТ',
+          },
+        ],
+      ];
+
+      document.querySelector('.test-header').textContent =
+        testObj[2][0].nameOfTest;
+
+      document.querySelector('.main-page-image-url').src =
+        testObj[2][0].mainPageUrl;
+
+      document.querySelector('.lets-play-button').onclick = e => {
+        let someQuest = document.querySelector(".testQuery")
+        
+        
+        
+        
+        e.target.parentNode.classList.add('el-out');
+
+        
+        
+        
+
+        
+        
+        
+
+        setTimeout(() => {
+          e.target.parentNode.style.display = 'none'
+          someQuest.classList.add('fade-in-item')  
+          someQuest.style.display = 'flex'  
+          someQuest.querySelector('.question-page-image-url').src = testObj[1][0].questionImage
+          someQuest.querySelector('.qCard').textContent = testObj[1][0].question
+          someQuest.querySelector('.aCard').textContent = testObj[1][0].answers[0].answer
+          someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][0].id + 1}`
+
+          
+
+
+
+
+
+
+
+
+          
+        }, 500);
+      };
+    </script>
+  </body>
+</html>

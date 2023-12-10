@@ -5,6 +5,7 @@ import TestArray from './components/TestArray';
 import TestPreview from './components/TestPreview';
 import TestBeauty from './components/TestBeauty';
 import MainPage from './components/MainPage';
+import Output from './components/Output';
 
 function App() {
   const [route, setRoute] = useState(['test', 'results', 'preview']);
@@ -78,12 +79,24 @@ function App() {
         >
           BEAUTY
         </button>
+        <button
+          className='navigate'
+          onClick={e => {
+            navBarDecor(e);
+            setRoute('testOut');
+          }}
+        >
+          Test out
+        </button>
       </div>
+
       {route === 'mainPage' && <MainPage />}
       {route === 'test' && <TestArray />}
       {route === 'results' && <ResultsArray />}
       {route === 'preview' && <TestPreview />}
       {route === 'beauty' && <TestBeauty />}
+      {route === 'testOut' && <Output />}
+
     </div>
   );
 }
