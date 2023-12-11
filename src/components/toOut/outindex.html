@@ -242,6 +242,7 @@
 
     <div>
       <div class="test-preview-holder-beauty">
+        
         <div class="tCardBeauty">
           <div class="iCard">
             <img
@@ -264,9 +265,7 @@
           <div class='qCard'>
             <p>Вопрос</p>
           </div>            
-              <div class='aCard'>
-                Ответ
-              </div>
+              
            </div>
 
       </div>
@@ -370,41 +369,58 @@
       document.querySelector('.main-page-image-url').src =
         testObj[2][0].mainPageUrl;
 
+      const tBody = document.querySelector('.test-preview-holder-beauty')
+
       document.querySelector('.lets-play-button').onclick = e => {
         let someQuest = document.querySelector(".testQuery")
-        
-        
-        
+        let someAnswer = document.querySelector('.aCard')
         
         e.target.parentNode.classList.add('el-out');
-
         
-        
-        
-
-        
-        
-        
-
         setTimeout(() => {
           e.target.parentNode.style.display = 'none'
+
+          for (el in testObj[1]){                    
+            someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][el].id + 1}`          
+            someQuest.querySelector('.question-page-image-url').src = testObj[1][el].questionImage
+            someQuest.querySelector('.qCard').textContent = testObj[1][el].question
+            
+            tBody.appendChild(someQuest.cloneNode(true))
+            someQuest.style.display = 'flex'
+            someQuest.classList.add('action-card')
+          }
+          
+          const actionCards = document.querySelectorAll('.action-card')
+
+          for (let i = 0; i < actionCards.length; i++){
+            testObj[1][i].answers.map((ans)=>{
+              let newAns = document.createElement('div')
+              newAns.classList.add('aCard')  
+              newAns.textContent = ans.answer
+              actionCards[i].appendChild(newAns)
+              
+              console.log(ans)
+            })
+
+
+          }
+          
+                                 
+          
+          
+          
+          
+          
+          
+          
+          
+          
           someQuest.classList.add('fade-in-item')  
           someQuest.style.display = 'flex'  
           someQuest.querySelector('.question-page-image-url').src = testObj[1][0].questionImage
           someQuest.querySelector('.qCard').textContent = testObj[1][0].question
-          someQuest.querySelector('.aCard').textContent = testObj[1][0].answers[0].answer
+          
           someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][0].id + 1}`
-
-          
-
-
-
-
-
-
-
-
-          
         }, 500);
       };
     </script>
