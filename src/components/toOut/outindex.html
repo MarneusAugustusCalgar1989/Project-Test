@@ -419,12 +419,47 @@
             someQuest.querySelector('.qCard').textContent =
               testObj[1][el].question;
 
+<<<<<<< HEAD
             tBody.appendChild(someQuest.cloneNode(true));
             <!-- someQuest.style.display = 'flex' -->
             someQuest.classList.add('action-card');
+=======
+          for (el in testObj[1]){                    
+            someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][el].id + 1}`          
+            someQuest.querySelector('.question-page-image-url').src = testObj[1][el].questionImage
+            someQuest.querySelector('.qCard').textContent = testObj[1][el].question
+            
+            tBody.appendChild(someQuest.cloneNode(true))
+            // someQuest.style.display = 'flex'
+            someQuest.classList.add('action-card')
+>>>>>>> c87beca3e7df611caf02004ae389393109af78a1
           }
 
+<<<<<<< HEAD
           const actionCards = document.querySelectorAll('.action-card');
+=======
+          for (let i = 0; i < actionCards.length; i++){
+            testObj[1][i].answers.map((ans)=>{
+              let newAns = document.createElement('div')
+              newAns.classList.add('aCard')  
+              newAns.textContent = ans.answer
+              actionCards[i].appendChild(newAns)
+              newAns.addEventListener('click', (e)=>{
+                console.log('!!!')
+
+                e.target.parentNode.classList.add('el-out')
+                setTimeout(()=>{
+                  e.target.parentNode.remove()
+
+                },300)
+                
+                
+                
+              })
+              
+
+            })
+>>>>>>> c87beca3e7df611caf02004ae389393109af78a1
 
           for (let i = 0; i < actionCards.length; i++) {
             testObj[1][i].answers.map(ans => {
@@ -440,6 +475,7 @@
               console.log(ans);
             });
           }
+<<<<<<< HEAD
           actionCards[0].style.display = 'flex';
 
           someQuest.classList.add('fade-in-item');
@@ -452,6 +488,13 @@
           someQuest.querySelector('h1').textContent = `Вопрос № ${
             testObj[1][0].id + 1
           }`;
+=======
+          someQuest.classList.add('fade-in-item')  
+          someQuest.style.display = 'flex'  
+          someQuest.querySelector('.question-page-image-url').src = testObj[1][0].questionImage
+          someQuest.querySelector('.qCard').textContent = testObj[1][0].question          
+          someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][0].id + 1}`
+>>>>>>> c87beca3e7df611caf02004ae389393109af78a1
         }, 500);
       };
     </script>
