@@ -205,8 +205,7 @@
       }
 
       .fade-in-item {
-        animation: fade-in .5s ease-in-out;
-        
+        animation: fade-in 0.5s ease-in-out;
       }
 
       .fade-out-item {
@@ -216,7 +215,7 @@
       .el-out {
         animation: fade-out 0.5s ease-in-out;
       }
-      .testQuery{
+      .testQuery {
         display: none;
         margin-top: 3rem;
       }
@@ -242,41 +241,49 @@
 
     <div>
       <div class="test-preview-holder-beauty">
-        
         <div class="tCardBeauty">
           <div class="iCard">
-            <img
-              class="main-page-image-url"
-              src=""
-              alt="Заглавная картинка"
-            />
+            <img class="main-page-image-url" src="" alt="Заглавная картинка" />
           </div>
           <div class="qCard">
             <h2 class="test-header"></h2>
           </div>
           <div class="lets-play-button">Начать тест</div>
         </div>
-        <div class='testQuery tCardBeauty' style = 'display:none'>
-          <h1 class = 'question-counter'>Вопрос № </h1>
+        <div class="testQuery tCardBeauty" style="display: none">
+          <h1 class="question-counter">Вопрос №</h1>
 
-          <div class='iCard'>
-            <img class = "question-page-image-url" src="" alt='Картинка к вопросу' />
+          <div class="iCard">
+            <img
+              class="question-page-image-url"
+              src=""
+              alt="Картинка к вопросу"
+            />
           </div>
-          <div class='qCard'>
+          <div class="qCard">
             <p>Вопрос</p>
-          </div>            
-              
-           </div>
+          </div>
+        </div>
+        <div class="tCard result itog">
+          <h1>Заголовок результата</h1>
+          <div class="iCard">
+            <img
+              src="'https://obzor.city/data/images/news_2023/12/kniga/1_2_.jpg'"
+              alt="Картинка к результату"
+            />
+          </div>
+          <div class="ancor-block">
+            <div class="aCardresult">
+              <p>Заголовок результата</p>
+            </div>
 
+            <div class="qCard result">
+              <p>Описание результата</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-
-        
-    </div>
-
-
-    
 
     <script>
       const testObj = [
@@ -353,6 +360,29 @@
               },
             ],
           },
+          {
+            id: 2,
+            questionImage:
+              'https://obzor.city/data/images/news_2023/12/kniga/1_5_.jpg',
+            question: 'Третий вопрос',
+            answers: [
+              {
+                answerId: 0,
+                answer: 'Первый ответ третьего вопроса',
+                answerRelation: 0,
+              },
+              {
+                answerId: 1,
+                answer: 'Второй ответ третьего вопроса',
+                answerRelation: 1,
+              },
+              {
+                answerId: 2,
+                answer: 'Третий ответ третьего вопроса',
+                answerRelation: 2,
+              },
+            ],
+          },
         ],
         [
           {
@@ -369,58 +399,59 @@
       document.querySelector('.main-page-image-url').src =
         testObj[2][0].mainPageUrl;
 
-      const tBody = document.querySelector('.test-preview-holder-beauty')
+      const tBody = document.querySelector('.test-preview-holder-beauty');
 
       document.querySelector('.lets-play-button').onclick = e => {
-        let someQuest = document.querySelector(".testQuery")
-        let someAnswer = document.querySelector('.aCard')
-        
+        let someQuest = document.querySelector('.testQuery');
+        let someAnswer = document.querySelector('.aCard');
+
         e.target.parentNode.classList.add('el-out');
-        
+
         setTimeout(() => {
-          e.target.parentNode.style.display = 'none'
+          <!-- e.target.parentNode.style.display = 'none' -->
+          e.target.parentNode.remove();
+          for (el in testObj[1]) {
+            someQuest.querySelector('h1').textContent = `Вопрос № ${
+              testObj[1][el].id + 1
+            }`;
+            someQuest.querySelector('.question-page-image-url').src =
+              testObj[1][el].questionImage;
+            someQuest.querySelector('.qCard').textContent =
+              testObj[1][el].question;
 
-          for (el in testObj[1]){                    
-            someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][el].id + 1}`          
-            someQuest.querySelector('.question-page-image-url').src = testObj[1][el].questionImage
-            someQuest.querySelector('.qCard').textContent = testObj[1][el].question
-            
-            tBody.appendChild(someQuest.cloneNode(true))
-            someQuest.style.display = 'flex'
-            someQuest.classList.add('action-card')
+            tBody.appendChild(someQuest.cloneNode(true));
+            <!-- someQuest.style.display = 'flex' -->
+            someQuest.classList.add('action-card');
           }
-          
-          const actionCards = document.querySelectorAll('.action-card')
 
-          for (let i = 0; i < actionCards.length; i++){
-            testObj[1][i].answers.map((ans)=>{
-              let newAns = document.createElement('div')
-              newAns.classList.add('aCard')  
-              newAns.textContent = ans.answer
-              actionCards[i].appendChild(newAns)
-              
-              console.log(ans)
-            })
+          const actionCards = document.querySelectorAll('.action-card');
 
+          for (let i = 0; i < actionCards.length; i++) {
+            testObj[1][i].answers.map(ans => {
+              let newAns = document.createElement('div');
+              newAns.classList.add('aCard');
+              newAns.textContent = ans.answer;
+              actionCards[i].appendChild(newAns);
+              newAns.addEventListener('click', e => {
+                e.target.parentNode.remove();
+                actionCards[i + 1].style.display = 'flex';
+              });
 
+              console.log(ans);
+            });
           }
-          
-                                 
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          someQuest.classList.add('fade-in-item')  
-          someQuest.style.display = 'flex'  
-          someQuest.querySelector('.question-page-image-url').src = testObj[1][0].questionImage
-          someQuest.querySelector('.qCard').textContent = testObj[1][0].question
-          
-          someQuest.querySelector('h1').textContent = `Вопрос № ${testObj[1][0].id + 1}`
+          actionCards[0].style.display = 'flex';
+
+          someQuest.classList.add('fade-in-item');
+          someQuest.style.display = 'flex';
+          someQuest.querySelector('.question-page-image-url').src =
+            testObj[1][0].questionImage;
+          someQuest.querySelector('.qCard').textContent =
+            testObj[1][0].question;
+
+          someQuest.querySelector('h1').textContent = `Вопрос № ${
+            testObj[1][0].id + 1
+          }`;
         }, 500);
       };
     </script>
