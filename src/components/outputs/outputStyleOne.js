@@ -1,13 +1,17 @@
 export const testStyle = `<style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+    
 
     .test-preview-holder-beauty :first-child {
       display: flex;
+    }
+
+    .test-preview-holder-beauty:before{
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+
     }
 
     .test-preview-holder-beauty {
@@ -19,7 +23,8 @@ export const testStyle = `<style>
       align-items: center;
       justify-content: center;
       color: cadetblue;
-      margin-top: -4rem;
+      text-align:center;
+      
       animation: fade-in 0.5s ease-in-out 1;
     }
 
