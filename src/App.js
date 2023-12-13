@@ -5,10 +5,14 @@ import TestArray from './components/TestArray';
 import TestPreview from './components/TestPreview';
 import TestBeauty from './components/TestBeauty';
 import MainPage from './components/MainPage';
-import Output from './components/Output';
+import { useSelector } from 'react-redux';
+import { testStyle } from './components/outputs/outputStyleOne';
+import { testScript } from './components/outputs/outputScript';
+import { outLayout } from './components/outputs/outLayout';
 
 function App() {
   const [route, setRoute] = useState(['test', 'results', 'preview']);
+  const state = useSelector(state => state);
 
   const navBarDecor = e => {
     for (
@@ -28,6 +32,18 @@ function App() {
     setRoute('mainPage');
     document.querySelector('.first').classList.add('active-button');
   });
+
+  function makeOutput() {
+    let toOutput =
+      testStyle +
+      outLayout +
+      `<script> const testObj = ${JSON.stringify(state)}</script>` +
+      testScript;
+
+    navigator.clipboard.writeText(toOutput).then(() => {
+      alert('Скопировано!');
+    });
+  }
 
   return (
     <div className='App'>
@@ -83,7 +99,7 @@ function App() {
           className='navigate'
           onClick={e => {
             navBarDecor(e);
-            setRoute('testOut');
+            makeOutput();
           }}
         >
           Test out
@@ -95,8 +111,6 @@ function App() {
       {route === 'results' && <ResultsArray />}
       {route === 'preview' && <TestPreview />}
       {route === 'beauty' && <TestBeauty />}
-      {route === 'testOut' && <Output />}
-
     </div>
   );
 }
