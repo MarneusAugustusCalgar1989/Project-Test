@@ -61,7 +61,7 @@
 
   background-color: rgb(161, 224, 226);
   border-radius: 10px;
-  height: 100px;
+  min-height: 100px;
   color: white;
   font-size: 2rem;
 
@@ -75,6 +75,8 @@
 .resultDescriptionInputStyle p {
   font-size: 1rem;
   cursor: pointer;
+  padding: 1rem 1rem;
+  text-align: left;
 }
 
 .resultDescriptionInputStyle form {
@@ -96,6 +98,31 @@
   font-size: 1rem;
   text-align: center;
   width: 80%;
+}
+
+.resultDescriptionInputStyle textarea {
+  width: 100%;
+
+  outline: none;
+  outline-offset: 0;
+  background-color: rgb(161, 224, 226);
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  width: 80%;
+  padding: 1rem 0.5rem;
+  resize: none;
+  text-align: left;
+  overflow: hidden;
+}
+
+.resultDescriptionInputStyle textarea::-webkit-input-placeholder {
+  color: white;
+  opacity: 0.5;
+  font-size: 1rem;
+  width: 100%;
 }
 
 .resultDescriptionInputStyle input::-webkit-input-placeholder {

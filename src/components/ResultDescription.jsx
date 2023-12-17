@@ -11,6 +11,12 @@ const ResultDescription = ({ cardId }) => {
 
   const [resDescr, setResDescr] = useState(false)
 
+  const textAreaControl = (e) => {
+    if (e.target.value.length % 56 === 0) {
+      e.target.rows += 1
+    }
+  }
+
   const addResultDescriptionValue = (e) => {
     e.preventDefault()
 
@@ -33,8 +39,8 @@ const ResultDescription = ({ cardId }) => {
         cardId
       )
     )
+    textAreaControl(e)
   }
-
   return (
     <div
       className={styles.resultDescriptionInputStyle}
@@ -46,12 +52,18 @@ const ResultDescription = ({ cardId }) => {
       {resDescr && <p>{resultDescriptionText}</p>}
       {!resDescr && (
         <form>
-          <input
+          <textarea
             type="text"
             name="resultDescriptionField"
             placeholder="Описание результата"
             onChange={addResultDescriptionValueControlled}
             value={resultDescriptionText}
+            rows={Math.round(resultDescriptionText.length / 56) + 1}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                setResDescr(true)
+              }
+            }}
           />
           <button onClick={addResultDescriptionValue}>
             {' '}

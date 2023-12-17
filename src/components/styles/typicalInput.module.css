@@ -4,7 +4,7 @@
   width: 120%;
   background-color: cadetblue;
   border-radius: 10px;
-  height: 100px;
+  min-height: 100px;
   color: white;
   font-size: 1rem;
 
@@ -12,12 +12,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  word-wrap: break-word;
+
   margin-bottom: 1rem;
+  text-align: center;
 }
 
-.questionInputStyle p {
+.questionInputStyle h2 {
   font-size: 1rem;
   cursor: pointer;
+  padding: 1rem 1rem;
 }
 
 .questionInputStyle form {
@@ -45,6 +49,24 @@
   color: white;
   font-size: 1rem;
   text-align: center;
+}
+
+.questionInputStyle textarea {
+  width: 100%;
+  min-height: 100%;
+  border-radius: 10px;
+
+  outline: none;
+  outline-offset: 0;
+  background-color: cadetblue;
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+
+  resize: none;
+  overflow: auto;
 }
 
 .questionInputStyle input::-webkit-input-placeholder {
@@ -112,6 +134,23 @@
   text-align: center;
 }
 
+.answerInputStyle textarea {
+  width: 100%;
+  height: 100%;
+
+  outline: none;
+  outline-offset: 0;
+  background-color: rgb(161, 224, 226);
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  resize: none;
+
+  word-wrap: none;
+}
+
 .answerInputStyle input::-webkit-input-placeholder {
   color: white;
   opacity: 0.5;
@@ -135,10 +174,12 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  word-wrap: break-word;
 }
 
 .lonelyAnswer p {
   font-size: 1rem;
+  padding: 1rem 0.5rem;
   word-wrap: break-word;
   cursor: pointer;
 }
@@ -166,6 +207,30 @@
   color: white;
   font-size: 1rem;
   text-align: center;
+}
+
+.lonelyAnswer textarea {
+  width: 100%;
+  height: 100%;
+
+  outline: none;
+  outline-offset: 0;
+  background-color: rgb(161, 224, 226);
+  box-shadow: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  resize: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+}
+
+.lonelyAnswer textarea p {
+  padding: 1rem 0.5rem;
 }
 
 .lonelyAnswer input::-webkit-input-placeholder {

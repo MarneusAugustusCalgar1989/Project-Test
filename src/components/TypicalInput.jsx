@@ -32,6 +32,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
   const addTextQuestionControlled = (e) => {
     const question = e.target.parentNode.question.value
     dispatch(addQuestion(question, parentId))
+    textAreaControl(e)
   }
 
   // Добавляем ответы
@@ -46,9 +47,17 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
     }
   }
 
+  const textAreaControl = (e) => {
+    e.target.style.rows += 1
+    if (e.target.value.length % 56 === 0) {
+      e.target.rows += 1
+    }
+  }
+
   const addAnswerTextControlled = (e) => {
     const answer = e.target.parentNode.answer.value
     dispatch(addAnswer(answer, tId, parentId))
+    textAreaControl(e)
   }
 
   const addPreviousValue = (e) => {
@@ -62,7 +71,6 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
   const addNameOfTest = (e) => {
     e.preventDefault()
     const testName = e.target.parentNode.nameOfTestField.value
-    console.log(testName)
 
     if (testName.length > 1) {
       dispatch(addTestName(testName.toUpperCase()))
@@ -115,13 +123,19 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
           )}
           {!qInput && (
             <form>
-              <input
+              <textarea
                 className="testQuest"
+                rows={Math.round(tCont.length / 56) + 1}
                 type="text"
                 name="question"
                 placeholder="Введите текст вопроса"
                 onChange={addTextQuestionControlled}
                 value={tCont}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setQinput(true)
+                  }
+                }}
               />
               <button onClick={addTextQuestion}> Добавить вопрос </button>
             </form>
@@ -154,12 +168,18 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
 
             {!aInput && (
               <form>
-                <input
+                <textarea
                   type="text"
                   name="answer"
                   placeholder="Введите текст ответа"
+                  rows={Math.round(tCont.length / 56) + 1}
                   value={tCont}
                   onChange={addAnswerTextControlled}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setAinput(true)
+                    }
+                  }}
                 />
                 <button
                   onClick={addAnswerText}

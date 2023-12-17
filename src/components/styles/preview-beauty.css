@@ -96,7 +96,7 @@
   font-size: 2rem;
 }
 
-.qCard.result {
+.qCard .result {
   padding: 0.5rem;
   margin-top: 1rem;
   min-height: 7rem;
@@ -122,13 +122,13 @@
 }
 
 .aCardresult {
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0px 0px 10px 10px;
   background-color: rgb(161, 224, 226);
   color: aliceblue;
   font-size: 1.5rem;
@@ -138,6 +138,11 @@
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
+  padding: 1rem;
+}
+
+.aCardresult p {
+  text-align: left;
 }
 
 .aCard:hover {
