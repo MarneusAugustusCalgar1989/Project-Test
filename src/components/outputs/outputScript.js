@@ -64,9 +64,9 @@ document.querySelector('.lets-play-button').onclick = e => {
               itog.querySelector('.result-header').textContent =
                 sortedResults[0].resHeader;
               itog.querySelector('.aCardresult').textContent =
-                sortedResults[0].resHeader;
-              itog.querySelector('.qCard').textContent =
                 sortedResults[0].resDescr;
+              itog.querySelector('.qCard').textContent =
+                sortedResults[0].resHeader;
               itog.style.display = 'flex';
               itog.classList.add('fade-in-item');
               itog.querySelector('.result-image').src = testObj[0][1].resImg;
@@ -87,4 +87,4 @@ document.querySelector('.lets-play-button').onclick = e => {
    
   }, 500);
 };
-</script>`;
+</script>`

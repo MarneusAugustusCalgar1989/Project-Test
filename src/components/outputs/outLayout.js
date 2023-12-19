@@ -34,15 +34,17 @@ export const outLayout = `
       />
     </div>
     <div class="ancor-block">
-      <div class="aCardresult">
+    <div class="qCard result">
+        <p>Описание результата</p>
+      </div>  
+    
+    <div class="aCardresult">
         <p>Заголовок результата</p>
       </div>
 
-      <div class="qCard result">
-        <p>Описание результата</p>
-      </div>
+      
     </div>
   </div>
 </div>
 </div>
-`;
+`

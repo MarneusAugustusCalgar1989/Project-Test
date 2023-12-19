@@ -20,7 +20,7 @@
 
       .test-preview-holder-beauty {
         background-color: azure;
-        min-height: 100vh;
+        min-height: 500px;
         width: 500px;
         display: flex;
         flex-direction: column;
@@ -119,7 +119,9 @@
       .qCard.result {
         padding: 0.5rem;
         margin-top: 1rem;
+        margin-bottom: 0rem;
         min-height: 7rem;
+
         -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
         -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
         box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -148,13 +150,13 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        border-radius: 10px;
+        border-radius: 0px 0px 10px 10px;
         background-color: rgb(161, 224, 226);
         color: aliceblue;
         font-size: 1.5rem;
 
-        margin-bottom: -15rem;
-        min-height: 7rem;
+        margin-bottom: 1rem;
+        min-height: 5rem;
         -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
         -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
         box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -203,7 +205,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin-top: 7rem;
+        margin-top: 0rem;
       }
 
       .fade-in-item {
@@ -276,12 +278,11 @@
             />
           </div>
           <div class="ancor-block">
-            <div class="aCardresult">
-              <p>Заголовок результата</p>
-            </div>
-
             <div class="qCard result">
               <p>Описание результата</p>
+            </div>
+            <div class="aCardresult">
+              <p>Заголовок результата</p>
             </div>
           </div>
         </div>
@@ -394,107 +395,106 @@
             nameOfTest: 'ТЕСТОВЫЙ ТЕСТ',
           },
         ],
-      ];
+      ]
 
       document.querySelector('.test-header').textContent =
-        testObj[2][0].nameOfTest;
+        testObj[2][0].nameOfTest
 
       document.querySelector('.main-page-image-url').src =
-        testObj[2][0].mainPageUrl;
-      const itog = document.querySelector('.itog');
-      itog.style.display = 'none';
-      const tBody = document.querySelector('.test-preview-holder-beauty');
+        testObj[2][0].mainPageUrl
+      const itog = document.querySelector('.itog')
+      itog.style.display = 'none'
+      const tBody = document.querySelector('.test-preview-holder-beauty')
 
-      document.querySelector('.lets-play-button').onclick = e => {
-        let someQuest = document.querySelector('.testQuery');
-        let someAnswer = document.querySelector('.aCard');
+      document.querySelector('.lets-play-button').onclick = (e) => {
+        let someQuest = document.querySelector('.testQuery')
+        let someAnswer = document.querySelector('.aCard')
 
-        e.target.parentNode.classList.add('el-out');
+        e.target.parentNode.classList.add('el-out')
 
         setTimeout(() => {
           <!-- e.target.parentNode.style.display = 'none' -->
-          e.target.parentNode.remove();
+          e.target.parentNode.remove()
 
           for (el in testObj[1]) {
             someQuest.querySelector('h1').textContent = `Вопрос № ${
               testObj[1][el].id + 1
-            }`;
+            }`
             someQuest.querySelector('.question-page-image-url').src =
-              testObj[1][el].questionImage;
+              testObj[1][el].questionImage
             someQuest.querySelector('.qCard').textContent =
-              testObj[1][el].question;
+              testObj[1][el].question
 
-            tBody.appendChild(someQuest.cloneNode(true));
+            tBody.appendChild(someQuest.cloneNode(true))
 
-            someQuest.classList.add('action-card');
+            someQuest.classList.add('action-card')
           }
 
-          const actionCards = document.querySelectorAll('.action-card');
+          const actionCards = document.querySelectorAll('.action-card')
 
           for (let i = 0; i < actionCards.length; i++) {
-            testObj[1][i].answers.map(ans => {
-              let newAns = document.createElement('div');
-              newAns.classList.add('aCard');
-              newAns.textContent = ans.answer;
-              actionCards[i].appendChild(newAns);
+            testObj[1][i].answers.map((ans) => {
+              let newAns = document.createElement('div')
+              newAns.classList.add('aCard')
+              newAns.textContent = ans.answer
+              actionCards[i].appendChild(newAns)
 
-              newAns.addEventListener('click', e => {
-                e.target.parentNode.classList.add('el-out');
-                let clickedAnswer = e.target.textContent;
-                let findItem = testObj[1][i].answers.find(el => {
-                  return el.answer === clickedAnswer;
-                });
-                testObj[0].map(el => {
+              newAns.addEventListener('click', (e) => {
+                e.target.parentNode.classList.add('el-out')
+                let clickedAnswer = e.target.textContent
+                let findItem = testObj[1][i].answers.find((el) => {
+                  return el.answer === clickedAnswer
+                })
+                testObj[0].map((el) => {
                   if (el.resId === findItem.answerRelation) {
-                    el.resCount += 1;
+                    el.resCount += 1
                   }
-                });
+                })
 
-                let findResult = testObj[0].find(el => {
-                  return el.resId === findItem.answerRelation;
-                });
+                let findResult = testObj[0].find((el) => {
+                  return el.resId === findItem.answerRelation
+                })
 
                 setTimeout(() => {
-                  e.target.parentNode.remove();
+                  e.target.parentNode.remove()
                   if (actionCards[i + 1]) {
-                    actionCards[i + 1].style.display = 'flex';
-                    actionCards[i + 1].classList.add('fade-in-item');
+                    actionCards[i + 1].style.display = 'flex'
+                    actionCards[i + 1].classList.add('fade-in-item')
                   } else {
                     let sortedResults = testObj[0].sort((a, b) => {
-                      return b.resCount - a.resCount;
-                    });
+                      return b.resCount - a.resCount
+                    })
                     itog.querySelector('.result-image').src =
-                      sortedResults[0].resImg;
+                      sortedResults[0].resImg
                     itog.querySelector('.result-header').textContent =
-                      sortedResults[0].resHeader;
+                      sortedResults[0].resHeader
                     itog.querySelector('.aCardresult').textContent =
-                      sortedResults[0].resHeader;
+                      sortedResults[0].resDescr
                     itog.querySelector('.qCard').textContent =
-                      sortedResults[0].resDescr;
-                    itog.style.display = 'flex';
-                    itog.classList.add('fade-in-item');
+                      sortedResults[0].resHeader
+                    itog.style.display = 'flex'
+                    itog.classList.add('fade-in-item')
                     itog.querySelector('.result-image').src =
-                      testObj[0][1].resImg;
+                      testObj[0][1].resImg
                   }
-                }, 400);
-              });
-            });
+                }, 400)
+              })
+            })
           }
 
-          actionCards[0].style.display = 'flex';
+          actionCards[0].style.display = 'flex'
 
-          someQuest.classList.add('fade-in-item');
-          someQuest.style.display = 'flex';
+          someQuest.classList.add('fade-in-item')
+          someQuest.style.display = 'flex'
           someQuest.querySelector('.question-page-image-url').src =
-            testObj[1][0].questionImage;
-          someQuest.querySelector('.qCard').textContent =
-            testObj[1][0].question;
+            testObj[1][0].questionImage
+          someQuest.querySelector('.qCard').textContent = testObj[1][0].question
 
           someQuest.querySelector('h1').textContent = `Вопрос № ${
             testObj[1][0].id + 1
-          }`;
-        }, 500);
-      };
+          }`
+        }, 500)
+      }
     </script>
   </body>
 </html>
