@@ -14,12 +14,15 @@ document.querySelector('.lets-play-button').onclick = e => {
 
   setTimeout(() => {
     e.target.parentNode.remove();
+    
 
     for (el in testObj[1]) {
       
-      someQuest.querySelector('.question-page-image-url').src =
-        testObj[1][el].questionImage;
+      
+    
+      someQuest.querySelector('.question-page-image-url').src = testObj[1][el].questionImage;
       someQuest.querySelector('.qCard').textContent = testObj[1][el].question;
+      
 
       tBody.appendChild(someQuest.cloneNode(true));
 
@@ -27,8 +30,9 @@ document.querySelector('.lets-play-button').onclick = e => {
     }
 
     const actionCards = document.querySelectorAll('.action-card');
-
     for (let i = 0; i < actionCards.length; i++) {
+      actionCards[i].querySelector('.question-counter').textContent = 'Вопрос №' + parseInt(testObj[1][i].id + 1)
+      
       testObj[1][i].answers.map(ans => {
         let newAns = document.createElement('div');
         newAns.classList.add('aCard');
@@ -87,4 +91,4 @@ document.querySelector('.lets-play-button').onclick = e => {
    
   }, 500);
 };
-</script>`
+</script>`;

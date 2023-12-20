@@ -21,7 +21,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 3rem;
   margin-bottom: 1rem;
 
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0rem;
+  margin-bottom: 1rem;
   cursor: default;
   border-radius: 10px;
   padding: 2rem;
@@ -99,6 +99,7 @@
 .qCard.result {
   padding: 0.5rem;
   margin-top: 0.5rem;
+  margin-bottom: 0rem;
   min-height: 7rem;
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -179,6 +180,7 @@
 
 .itog {
   visibility: hidden;
+  margin-top: 2rem;
 }
 
 .test-card-result-holder {

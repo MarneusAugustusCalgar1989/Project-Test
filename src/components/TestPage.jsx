@@ -88,12 +88,20 @@ const TestPage = ({ el }) => {
             </>
           );
         })}
-        <button onClick={addNewAnswer} className='addNewAnswerButton'>
+        <button
+          onClick={addNewAnswer}
+          className='addNewAnswerButton'
+          key={el.question + el.questionImage}
+        >
           +
         </button>
       </div>
 
-      <button className='add-test-card' onClick={addCard}>
+      <button
+        className='add-test-card'
+        onClick={addCard}
+        key={el.question + el.questionImage + 'addButton'}
+      >
         Добавить тестовую карточку
       </button>
     </>

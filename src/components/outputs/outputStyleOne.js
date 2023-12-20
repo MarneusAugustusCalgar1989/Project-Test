@@ -1,7 +1,7 @@
 export const testStyle = `<style>
     
 
-body {
+.test-preview-holder-beauty::before{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -235,4 +235,4 @@ body {
     opacity: 0;
   }
 }
-  </style>`
+  </style>`;
