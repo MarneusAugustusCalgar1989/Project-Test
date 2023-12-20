@@ -86,7 +86,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   cursor: default;
   border-radius: 10px;
   padding: 2rem;
@@ -96,9 +96,9 @@
   font-size: 2rem;
 }
 
-.qCard .result {
+.qCard.result {
   padding: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   min-height: 7rem;
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -133,7 +133,7 @@
   color: aliceblue;
   font-size: 1.5rem;
 
-  margin-bottom: -15rem;
+  margin-bottom: 2rem;
   min-height: 7rem;
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -191,7 +191,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 7rem;
+  margin-top: 0rem;
 }
 
 .fade-in-item {
