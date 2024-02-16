@@ -47,7 +47,7 @@ const ResultDescription = ({ cardId }) => {
       onDoubleClick={() => {
         setResDescr(false)
       }}
-      title="Двойной клик для редактирования описания результата"
+      title="Сюда вводится описание результата. Двойной клик для редактирования."
     >
       {resDescr && <p>{resultDescriptionText}</p>}
       {!resDescr && (

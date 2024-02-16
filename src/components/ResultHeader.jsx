@@ -36,7 +36,7 @@ const ResultHeader = ({ cardId }) => {
       onDoubleClick={() => {
         setResultHeader(false)
       }}
-      title="Двойной клик, чтобы отредактировать результат"
+      title="Сюда вводится название результата. Двойной клик, чтобы отредактировать"
     >
       {resultHeader && (
         <div>

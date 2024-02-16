@@ -160,7 +160,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
             {aInput && (
               <p
                 onDoubleClick={() => setAinput(false)}
-                title="Двойной клик для редактирования ответа"
+                title="Правый клик для установки соответствия с результатом. Двойной клик для редактирования."
               >
                 {tCont}
               </p>
@@ -221,6 +221,7 @@ const TypicalInput = ({ stringType, tCont, tId, parentId }) => {
                 placeholder="Введите название"
                 onChange={addNameOfTestControlled}
                 value={mainPageState[0].nameOfTest}
+                title="Введите название теста"
               />
               <button onClick={addNameOfTest}> Добавить вопрос </button>
             </form>
