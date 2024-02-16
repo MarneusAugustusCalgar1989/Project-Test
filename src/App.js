@@ -74,6 +74,7 @@ function App() {
             navBarDecor(e)
             setRoute('results')
           }}
+          title="Здесь вводятся результаты с их картинками и описанием."
         >
           Итоги
         </button>
