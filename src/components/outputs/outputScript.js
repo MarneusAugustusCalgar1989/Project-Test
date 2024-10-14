@@ -73,7 +73,6 @@ document.querySelector('.lets-play-button').onclick = e => {
                 sortedResults[0].resHeader;
               itog.style.display = 'flex';
               itog.classList.add('fade-in-item');
-              itog.querySelector('.result-image').src = testObj[0][1].resImg;
             }
           }, 400);
         });
@@ -91,4 +90,4 @@ document.querySelector('.lets-play-button').onclick = e => {
    
   }, 500);
 };
-</script>`;
+</script>`

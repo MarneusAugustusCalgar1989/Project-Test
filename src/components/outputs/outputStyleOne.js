@@ -107,7 +107,7 @@ export const testStyle = `<style>
 
   background-color: cadetblue;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .qCard.result {
@@ -115,6 +115,7 @@ export const testStyle = `<style>
   margin-top: 1rem;
   margin-bottom: 0rem;
   min-height: 7rem;
+  font-size: 3rem;
 
   -webkit-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
   -moz-box-shadow: 7px 3px 8px 0px rgba(34, 60, 80, 0.2);
@@ -134,7 +135,7 @@ export const testStyle = `<style>
 
   background-color: rgb(161, 224, 226);
   color: aliceblue;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .aCardresult {
@@ -235,4 +236,4 @@ export const testStyle = `<style>
     opacity: 0;
   }
 }
-  </style>`;
+  </style>`
