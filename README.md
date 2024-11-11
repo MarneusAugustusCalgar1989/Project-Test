@@ -1,13 +1,11 @@
-# React-based project for creation quizes or some kind of that stuff
+# ТЕСТОДЕЛКА
 
-## Available Scripts
+## Что это такое?
 
-In the project directory, you can run:
+Это простой инструмент, с помощью которого можно создавать квизы в духе «Кто вы их трех богатырей?». Он работает только на клиенте, не собирает никаких данных и генерирует код, который можно вставить на сайт, чтобы поразвлечь аудиторию. 
 
-### `npm start`
+## Как это установить?
 
-Runs the app in the development mode, or don't run\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Как этим пользоваться?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Что будет дальше?
